@@ -1,6 +1,8 @@
 export const DATA = [
   {
     id: "8Rp2S7QXjkTy",
+    image:
+      "https://i.postimg.cc/Kz8VQ2XX/eb164ff2-0966-5601-beaf-2d54971223e3.jpg",
     title: "Peperomia Ginny",
     author: "Leona Crisp",
     description:
@@ -12,6 +14,7 @@ export const DATA = [
   },
   {
     id: "4Mn9B6ZLecFh",
+    image: "https://i.postimg.cc/05Mxqp4T/6-FERN-BIRDS-NEST-HURRICANE-1.png",
     title: "Bird’s Nest Fern",
     author: "David Marse",
     description:
@@ -23,6 +26,8 @@ export const DATA = [
   },
   {
     id: "1Kv0A3YDwgUi",
+    image:
+      "https://i.postimg.cc/Gpg0W2x3/9959f9a6-c158-5d57-a55b-2fc62e5256bf-8f1f78b4-f858-4495-a177-093677dbdb35.jpg",
     title: "Snake Plant",
     author: "plant_obsessed",
     description:
@@ -34,6 +39,8 @@ export const DATA = [
   },
   {
     id: "7Fp5R2JNxOqV",
+    image:
+      "https://i.postimg.cc/mgT0hMd2/57b5b271-43ab-595b-97de-8f89f97195a0.jpg",
     title: "ZZ Plant",
     author: "green_thumb",
     description:
@@ -45,6 +52,8 @@ export const DATA = [
   },
   {
     id: "3Wl8U9EIbTzG",
+    image:
+      "https://i.postimg.cc/MZR4DtNp/76af5eb3-5812-5cb7-b32a-b332c148895b-2d4cb61c-2bef-4f3b-b5c4-eb9431c5c8b4.jpg",
     title: "Pothos",
     author: "plant_addict",
     description:
@@ -56,6 +65,7 @@ export const DATA = [
   },
   {
     id: "6Yh2N1KdVmZx",
+    image: "https://i.postimg.cc/g2cTGpJx/1-Ficus-Lybata-6.jpg",
     title: "Fiddle Leaf Fig",
     author: "plant_enthusiast",
     description:
@@ -67,6 +77,8 @@ export const DATA = [
   },
   {
     id: "9Gj7B0CfLaRt",
+    image:
+      "https://i.postimg.cc/pTj0sX06/4-STRELITZIA-BIRD-OF-PARADISE-1-removebg-preview-1.png",
     title: "Bird of Paradise",
     author: "plant_lover",
     description:
@@ -78,6 +90,8 @@ export const DATA = [
   },
   {
     id: "2Tc5E4QpXuMo",
+    image:
+      "https://i.postimg.cc/GmSqrsVf/Macys-4-Ficus-Ruby-Pink-982d30e5-708f-44a6-a2eb-ee4f31a8ef13.jpg",
     title: "Rubber Plant",
     author: "green_thumb",
     description:
@@ -89,6 +103,8 @@ export const DATA = [
   },
   {
     id: "5Zm1W8VrPyNk",
+    image:
+      "https://i.postimg.cc/BbgBz82M/601340cf-c138-52c3-8d04-a3e96c8d34a8.jpg",
     title: "Aloe Vera",
     author: "plant_addict",
     description:
@@ -100,6 +116,8 @@ export const DATA = [
   },
   {
     id: "0Dv6L3UaGtIx",
+    image:
+      "https://i.postimg.cc/bwd96wr9/de18e712-f2bf-50bb-a702-8c654e8b25b6.jpg",
     title: "Spider Plant",
     author: "plant_obsessed",
     description:
@@ -111,6 +129,8 @@ export const DATA = [
   },
   {
     id: "7Qs2Z9EjKbMh",
+    image:
+      "https://i.postimg.cc/YCVfTBmK/73cb5a14-a1dc-5fb4-963e-6266884b2903.jpg",
     title: "Philodendron Brasil",
     author: "plant_enthusiast",
     description:
@@ -122,6 +142,8 @@ export const DATA = [
   },
   {
     id: "3Lc5G6FtVnKu",
+    image:
+      "https://i.postimg.cc/vBw7H7z0/55ec5d12-786e-5751-a974-0b49815c81eb.jpg",
     title: "Pilea Peperomioides",
     author: "plant_addict",
     description:
@@ -133,6 +155,8 @@ export const DATA = [
   },
   {
     id: "1Tm9X0NpRyOe",
+    image:
+      "https://i.postimg.cc/VLkq6kqP/10a6bd75-1338-5d38-b36a-6e6060686443.jpg",
     title: "Monstera Deliciosa",
     author: "plant_enthusiast",
     description:
@@ -144,6 +168,7 @@ export const DATA = [
   },
   {
     id: "6Bv4K7YjHgUi",
+    image: "https://i.postimg.cc/g2cTGpJx/1-Ficus-Lybata-6.jpg",
     title: "Fiddle Leaf Fig",
     author: "plant_obsessed",
     description:
@@ -155,6 +180,8 @@ export const DATA = [
   },
   {
     id: "9Dx3F2PqEaVl",
+    image:
+      "https://i.postimg.cc/hPVXKFwR/8b0ec882-5de9-5049-95f1-fbb1059c22bb.jpg",
     title: "Boston Fern",
     author: "plant_crazy",
     description:
@@ -166,6 +193,8 @@ export const DATA = [
   },
   {
     id: "2Sf1N6GkYbWu",
+    image:
+      "https://i.postimg.cc/Nftg7KNZ/3593be4a-b634-5996-abef-a36327ea3c56.jpg",
     title: "String of Pearls",
     author: "plant_addict",
     description:
