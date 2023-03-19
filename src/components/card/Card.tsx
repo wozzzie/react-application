@@ -2,6 +2,8 @@ import React from "react";
 import "./Card.css";
 
 interface CardProps {
+  id?: string;
+  key: string;
   image: string;
   title: string;
   author: string;

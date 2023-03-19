@@ -3,10 +3,17 @@ import { Routes, Route } from "react-router-dom";
 
 import About from "../../screens/about/About";
 import Error from "../../screens/error/Error";
+import Home from "../../screens/home/Home";
 class RoutesComponent extends Component {
   render(): JSX.Element {
     return (
       <Routes>
+        <Route
+          data-testid="main-page"
+          path="/"
+          element={<Home advice="Think green and plant something" />}
+        />
+
         <Route
           data-testid="about-page"
           path="/about"

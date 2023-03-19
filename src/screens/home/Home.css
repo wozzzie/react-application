@@ -1,0 +1,33 @@
+.home__card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  max-width: 60%;
+  width: 100%;
+}
+
+.home__advice {
+  font-size: 52px;
+  text-align: center;
+}
+
+.home__wrapper {
+  display: flex;
+  padding: 20px;
+}
+
+.home__img {
+  background-image: url('/img/home-plant.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 582px;
+  height: 803px;
+}
+
+.home__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
