@@ -2,6 +2,7 @@ import React from "react";
 
 import { DATA } from "../../data/data";
 import Card from "../../components/card/Card";
+import SearchBar from "../../components/searchBar/SearchBar";
 
 import "./Home.css";
 
@@ -14,6 +15,7 @@ class Home extends React.Component<HomeProps> {
     const { advice } = this.props;
     return (
       <div data-testid="main-page">
+        <SearchBar />
         <div className="home__wrapper">
           <div className="home__card">
             {DATA.map((card) => {
