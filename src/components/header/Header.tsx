@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, UNSAFE_LocationContext } from 'react-router-dom';
 
 import './Header.css';
 
@@ -13,25 +13,41 @@ class Header extends React.Component<HeaderProps> {
     const { home, about } = this.props;
     return (
       <>
+        {console.log(this.props)}
         <header className="header">
-          <NavLink
-            to="/"
-            data-testid="main-link"
-            className={({ isActive }): string =>
-              isActive ? 'header__link_active' : 'header__link'
-            }
-          >
-            {home}
-          </NavLink>
-          <NavLink
-            to="/about"
-            data-testid="about-link"
-            className={({ isActive }): string =>
-              isActive ? 'header__link_active' : 'header__link'
-            }
-          >
-            {about}
-          </NavLink>
+          <div>
+            <UNSAFE_LocationContext.Consumer>
+              {(value) => (
+                <p className="header__title">
+                  {value.location.pathname === '/'
+                    ? 'Home'
+                    : value.location.pathname === '/about'
+                    ? 'About'
+                    : ''}
+                </p>
+              )}
+            </UNSAFE_LocationContext.Consumer>
+          </div>
+          <div className="header__links">
+            <NavLink
+              to="/"
+              data-testid="main-link"
+              className={({ isActive }): string =>
+                isActive ? 'header__link_active' : 'header__link'
+              }
+            >
+              {home}
+            </NavLink>
+            <NavLink
+              to="/about"
+              data-testid="about-link"
+              className={({ isActive }): string =>
+                isActive ? 'header__link_active' : 'header__link'
+              }
+            >
+              {about}
+            </NavLink>
+          </div>
         </header>
       </>
     );

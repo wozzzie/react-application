@@ -1,8 +1,13 @@
 .header {
   padding: 40px;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
+  gap: 20px;
+}
+
+.header__links {
+  display: flex;
   gap: 20px;
 }
 
@@ -15,4 +20,9 @@
   text-decoration: none;
   color: #349014;
   font-weight: 700;
+}
+
+.header__title {
+  font-size: 42px;
+  font-weight: bold;
 }
