@@ -28,10 +28,10 @@ export const DATA = [
     image:
       'https://i.postimg.cc/Gpg0W2x3/9959f9a6-c158-5d57-a55b-2fc62e5256bf-8f1f78b4-f858-4495-a177-093677dbdb35.jpg',
     title: 'Snake Plant',
-    author: 'plant_obsessed',
+    author: 'Michael Scofield',
     description:
       "Snake plant, also known as Sansevieria, is a hardy and low maintenance plant with long, upright leaves that grow straight up like spears. Originating from West Africa, it's a great choice for beginners or for those who have limited space and time for plant care.",
-    location: 'West Africa',
+    location: 'North Africa',
     likes: '1921',
     requirements:
       'Snake plants can tolerate a wide range of light conditions, from low to bright indirect light. Water sparingly and only when the soil is completely dry, as they are prone to root rot.',
@@ -40,10 +40,10 @@ export const DATA = [
     id: '7Fp5R2JNxOqV',
     image: 'https://i.postimg.cc/mgT0hMd2/57b5b271-43ab-595b-97de-8f89f97195a0.jpg',
     title: 'ZZ Plant',
-    author: 'green_thumb',
+    author: 'Theodore "T-Bag" Bagwell',
     description:
       "ZZ plant, also known as Zamioculcas zamiifolia, is a popular houseplant with glossy, dark green leaves that resemble feathers. Native to Africa, it's a hardy and low maintenance plant that can tolerate neglect and low light conditions.",
-    location: 'Africa',
+    location: 'Mid Africa',
     likes: '2796',
     requirements:
       'ZZ plants can tolerate a wide range of light conditions, from low to bright indirect light. Water sparingly and only when the soil is completely dry, as they are prone to root rot.',
@@ -53,7 +53,7 @@ export const DATA = [
     image:
       'https://i.postimg.cc/MZR4DtNp/76af5eb3-5812-5cb7-b32a-b332c148895b-2d4cb61c-2bef-4f3b-b5c4-eb9431c5c8b4.jpg',
     title: 'Pothos',
-    author: 'plant_addict',
+    author: 'Sara Tancredi',
     description:
       "Pothos, also known as Devil's Ivy, is a popular trailing plant with heart-shaped leaves that come in a variety of colors and patterns. Native to the Solomon Islands, it's a great choice for beginners or for those who want a plant that can be easily propagated.",
     location: 'Solomon Islands',
@@ -65,13 +65,13 @@ export const DATA = [
     id: '6Yh2N1KdVmZx',
     image: 'https://i.postimg.cc/g2cTGpJx/1-Ficus-Lybata-6.jpg',
     title: 'Fiddle Leaf Fig',
-    author: 'plant_enthusiast',
+    author: 'Veronica Donovan',
     description:
-      'Fiddle Leaf Fig, also known as Ficus lyrata, is a popular houseplant with large, fiddle-shaped leaves that add a tropical touch to any room. Native to western Africa, it requires a bit more care and attention than some other houseplants.',
+      'Also known as Ficus lyrata, is a popular houseplant with large, fiddle-shaped leaves that add a tropical touch to any room. Native to western Africa, it requires a bit more care and attention than some other houseplants.',
     location: 'Western Africa',
     likes: '3467',
     requirements:
-      'Fiddle Leaf Figs require bright, indirect light and consistent moisture. Water when the top inch of soil is dry and rotate the plant periodically to ensure even growth.',
+      'Leaf Figs require bright, indirect light and consistent moisture. Water when the top inch of soil is dry and rotate the plant periodically to ensure even growth.',
   },
   {
     id: '9Gj7B0CfLaRt',
@@ -79,7 +79,7 @@ export const DATA = [
     title: 'Bird of Paradise',
     author: 'plant_lover',
     description:
-      "Bird of Paradise, also known as Strelitzia reginae, is a tropical plant with vibrant orange and blue flowers that resemble a bird in flight. Native to South Africa, it's a showstopper of a plant that requires a bit of care to thrive indoors.",
+      "Bird of Paradise, also known as Strelitzia reginae, is a tropical plant with vibrant orange and blue flowers that resemble a bird in flight. Native to Africa, it's a showstopper of a plant that requires a bit of care to thrive indoors.",
     location: 'South Africa',
     likes: '2118',
     requirements:
@@ -90,7 +90,7 @@ export const DATA = [
     image:
       'https://i.postimg.cc/GmSqrsVf/Macys-4-Ficus-Ruby-Pink-982d30e5-708f-44a6-a2eb-ee4f31a8ef13.jpg',
     title: 'Rubber Plant',
-    author: 'green_thumb',
+    author: 'John Abruzzi',
     description:
       "Rubber Plant, also known as Ficus elastica, is a popular houseplant with glossy, dark green leaves that can grow up to a foot long. Native to Southeast Asia, it's a hardy and low maintenance plant that can thrive in a variety of conditions.",
     location: 'Southeast Asia',
@@ -102,10 +102,10 @@ export const DATA = [
     id: '5Zm1W8VrPyNk',
     image: 'https://i.postimg.cc/BbgBz82M/601340cf-c138-52c3-8d04-a3e96c8d34a8.jpg',
     title: 'Aloe Vera',
-    author: 'plant_addict',
+    author: 'Brad Bellick',
     description:
       "Aloe Vera is a popular succulent plant with thick, spiky leaves that are known for their healing properties. Native to North Africa, it's an easy to care for plant that thrives in bright, indirect light.",
-    location: 'North Africa',
+    location: 'Northen Africa',
     likes: '3752',
     requirements:
       'Aloe Vera prefers bright, indirect light and well-draining soil. Water sparingly and only when the soil is completely dry, as they are prone to root rot.',
@@ -114,7 +114,7 @@ export const DATA = [
     id: '0Dv6L3UaGtIx',
     image: 'https://i.postimg.cc/bwd96wr9/de18e712-f2bf-50bb-a702-8c654e8b25b6.jpg',
     title: 'Spider Plant',
-    author: 'plant_obsessed',
+    author: 'Fernando Sucre',
     description:
       "Spider Plant, also known as Chlorophytum comosum, is a popular houseplant with long, slender leaves that grow in a cascading pattern. Native to tropical and southern Africa, it's a great choice for beginners or for those who want a plant that's easy to propagate.",
     location: 'Tropical and Southern Africa',
@@ -126,7 +126,7 @@ export const DATA = [
     id: '7Qs2Z9EjKbMh',
     image: 'https://i.postimg.cc/YCVfTBmK/73cb5a14-a1dc-5fb4-963e-6266884b2903.jpg',
     title: 'Philodendron Brasil',
-    author: 'plant_enthusiast',
+    author: 'Sofia Lugo',
     description:
       "Philodendron Brasil is a popular houseplant with heart-shaped leaves that are variegated with shades of green and yellow. Native to South America, it's an easy to care for plant that can thrive in a variety of conditions.",
     location: 'South America',
@@ -138,7 +138,7 @@ export const DATA = [
     id: '3Lc5G6FtVnKu',
     image: 'https://i.postimg.cc/vBw7H7z0/55ec5d12-786e-5751-a974-0b49815c81eb.jpg',
     title: 'Pilea Peperomioides',
-    author: 'plant_addict',
+    author: 'Alexander Mahone',
     description:
       "Pilea Peperomioides, also known as the Chinese Money Plant, is a popular houseplant with round, coin-shaped leaves that grow on long stems. Native to Southern China, it's a relatively new plant in the houseplant world but has gained popularity for its unique appearance.",
     location: 'Southern China',
@@ -150,7 +150,7 @@ export const DATA = [
     id: '1Tm9X0NpRyOe',
     image: 'https://i.postimg.cc/VLkq6kqP/10a6bd75-1338-5d38-b36a-6e6060686443.jpg',
     title: 'Monstera Deliciosa',
-    author: 'plant_enthusiast',
+    author: 'James Whistler',
     description:
       "Monstera Deliciosa, also known as the Swiss Cheese Plant, is a popular houseplant with large, perforated leaves that can grow up to 3 feet long. Native to the tropical forests of Central and South America, it's a stunning plant that requires a bit of care to thrive indoors.",
     location: 'Central and South America',
@@ -161,14 +161,14 @@ export const DATA = [
   {
     id: '6Bv4K7YjHgUi',
     image: 'https://i.postimg.cc/g2cTGpJx/1-Ficus-Lybata-6.jpg',
-    title: 'Fiddle Leaf Fig',
-    author: 'plant_obsessed',
+    title: 'Fiddle Leaf',
+    author: 'Lincoln Burrows',
     description:
-      "Fiddle Leaf Fig, also known as Ficus lyrata, is a popular houseplant with large, violin-shaped leaves that can grow up to 18 inches long. Native to Western Africa, it's a stunning plant that requires a bit of care to thrive indoors.",
-    location: 'Western Africa',
+      "Also known as Ficus lyrata, is a popular houseplant with large, violin-shaped leaves that can grow up to 18 inches long. Native to Eastern Africa, it's a stunning plant that requires a bit of care to thrive indoors.",
+    location: 'Eastern Africa',
     likes: '4298',
     requirements:
-      'Fiddle Leaf Figs prefer bright, indirect light and well-draining soil. Water when the top inch of soil is dry and mist the leaves occasionally to increase humidity. Rotate the plant occasionally to ensure even growth.',
+      'Leafs prefer bright, indirect light and well-draining soil. Water when the top inch of soil is dry and mist the leaves occasionally to increase humidity. Rotate the plant occasionally to ensure even growth.',
   },
   {
     id: '9Dx3F2PqEaVl',
@@ -186,10 +186,10 @@ export const DATA = [
     id: '2Sf1N6GkYbWu',
     image: 'https://i.postimg.cc/Nftg7KNZ/3593be4a-b634-5996-abef-a36327ea3c56.jpg',
     title: 'String of Pearls',
-    author: 'plant_addict',
+    author: 'Paul Kellerman',
     description:
       "String of Pearls, also known as Senecio rowleyanus, is a unique and eye-catching trailing plant with small, round leaves that resemble pearls on a string. Native to South Africa, it's a great choice for hanging baskets or as a trailing accent plant.",
-    location: 'South Africa',
+    location: 'West Africa',
     likes: '2546',
     requirements:
       'String of Pearls prefer bright, indirect light and well-draining soil. Water sparingly and only when the soil is completely dry, as they are prone to root rot. Provide support for the plant as it grows, as it can become quite long and heavy.',
