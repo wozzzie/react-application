@@ -4,8 +4,8 @@ import { MemoryRouter } from 'react-router-dom';
 
 import RoutesComponent from '../../components/routes/RoutesComponent';
 
-describe('RoutesComponent', () => {
-  it('renders the main page', () => {
+describe('Routes Component', () => {
+  it('testing render of the main page', () => {
     render(
       <MemoryRouter initialEntries={['/']}>
         <RoutesComponent />
@@ -16,7 +16,7 @@ describe('RoutesComponent', () => {
     expect(mainPage).toBeInTheDocument();
   });
 
-  it('renders the about page', () => {
+  it('testing render of the about page', () => {
     render(
       <MemoryRouter initialEntries={['/about']}>
         <RoutesComponent />
@@ -35,7 +35,7 @@ describe('RoutesComponent', () => {
     expect(message).toBeInTheDocument();
   });
 
-  it('renders the error page', () => {
+  it('testing render of the error page', () => {
     render(
       <MemoryRouter initialEntries={['/unknown']}>
         <RoutesComponent />

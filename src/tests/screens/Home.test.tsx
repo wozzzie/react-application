@@ -3,12 +3,12 @@ import { render, screen } from '@testing-library/react';
 import Home from '../../screens/home/Home';
 import { DATA } from '../../data/data';
 
-describe('Home component', () => {
+describe('Home screen', () => {
   const testProps = {
     advice: 'Test Advice',
   };
 
-  test('renders home component with correct data', () => {
+  test('testing render multiply card components with correct data', () => {
     render(<Home {...testProps} />);
     expect(screen.getByTestId('main-page')).toBeInTheDocument();
 

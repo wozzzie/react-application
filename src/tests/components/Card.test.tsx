@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import Card from '../../components/card/Card';
 
 describe('Card component', () => {
-  const testProps = {
+  const props = {
     id: 'test-id',
     key: 'test-key',
     image: 'test-image-url',
@@ -15,8 +15,8 @@ describe('Card component', () => {
     requirements: 'Test Requirements',
   };
 
-  test('renders card component with correct data', () => {
-    render(<Card {...testProps} />);
+  test('testing single card component', () => {
+    render(<Card {...props} />);
 
     expect(screen.getByTestId('card')).toBeInTheDocument();
     expect(screen.getByText('Test Title')).toBeInTheDocument();

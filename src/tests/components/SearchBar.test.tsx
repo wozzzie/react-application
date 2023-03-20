@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import SearchBar from '../../components/searchBar/SearchBar';
 
-describe('SearchBar', () => {
-  test('renders search input', () => {
+describe('Search Bar component', () => {
+  test('testing render of the search input', () => {
     render(<SearchBar />);
 
     const searchInput = screen.getByTestId('search-input');
@@ -11,7 +11,7 @@ describe('SearchBar', () => {
     expect(searchInput).toHaveValue('');
   });
 
-  test('updates search input value', () => {
+  test('testing update of the search input value', () => {
     render(<SearchBar />);
 
     const searchInput = screen.getByTestId('search-input');
@@ -20,7 +20,7 @@ describe('SearchBar', () => {
     expect(searchInput).toHaveValue('plant');
   });
 
-  test('saves search input value to local storage', () => {
+  test('testing save search input value to local storage', () => {
     render(<SearchBar />);
 
     const searchInput = screen.getByTestId('search-input');
@@ -29,7 +29,7 @@ describe('SearchBar', () => {
     expect(localStorage.getItem('searchForm')).toEqual('plant');
   });
 
-  test('updates local storage on component unmount', () => {
+  test('testing update local storage on component unmount', () => {
     const { unmount } = render(<SearchBar />);
     const searchInput = screen.getByTestId('search-input');
 
@@ -40,12 +40,12 @@ describe('SearchBar', () => {
     expect(localStorage.getItem('searchForm')).toEqual('plant');
   });
 
-  test('loads value from local storage', () => {
-    localStorage.setItem('searchForm', 'flower');
+  test('testing load value from local storage', () => {
+    localStorage.setItem('searchForm', 'plant');
 
     render(<SearchBar />);
 
     const searchInput = screen.getByTestId('search-input');
-    expect(searchInput).toHaveValue('flower');
+    expect(searchInput).toHaveValue('plant');
   });
 });
