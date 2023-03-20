@@ -1,6 +1,5 @@
-import React from "react";
-
-import "./About.css";
+import React from 'react';
+import './About.css';
 
 type AboutProps = {
   title: string;

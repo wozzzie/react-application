@@ -1,5 +1,5 @@
-import React from "react";
-import "./Card.css";
+import React from 'react';
+import './Card.css';
 
 interface CardProps {
   id?: string;
@@ -15,8 +15,7 @@ interface CardProps {
 
 class Card extends React.Component<CardProps> {
   render() {
-    const { image, title, author, description, location, likes, requirements } =
-      this.props;
+    const { image, title, author, description, location, likes, requirements } = this.props;
 
     return (
       <div className="card" data-testid="card">

@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { DATA } from "../../data/data";
-import Card from "../../components/card/Card";
-import SearchBar from "../../components/searchBar/SearchBar";
+import { DATA } from '../../data/data';
+import Card from '../../components/card/Card';
+import SearchBar from '../../components/searchBar/SearchBar';
 
-import "./Home.css";
+import './Home.css';
 
 type HomeProps = {
   advice: string;

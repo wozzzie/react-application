@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { Component } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-import About from "../../screens/about/About";
-import Error from "../../screens/error/Error";
-import Home from "../../screens/home/Home";
+import About from '../../screens/about/About';
+import Error from '../../screens/error/Error';
+import Home from '../../screens/home/Home';
 class RoutesComponent extends Component {
   render(): JSX.Element {
     return (
@@ -29,9 +29,7 @@ class RoutesComponent extends Component {
         <Route
           data-testid="error-page"
           path="*"
-          element={
-            <Error errorMessage="Oops! Something went wrong. Please try again later." />
-          }
+          element={<Error errorMessage="Oops! Something went wrong. Please try again later." />}
         />
       </Routes>
     );

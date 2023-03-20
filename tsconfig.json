@@ -14,7 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react"
   },
   "include": ["vite.config.ts", ".eslintrc.json", "src", "src/components/searchBar/SearchBar.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]

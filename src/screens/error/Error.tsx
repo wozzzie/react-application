@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import "./Error.css";
+import './Error.css';
 
 interface ErrorProps {
   errorMessage: string;

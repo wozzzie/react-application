@@ -1,7 +1,7 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-import "./Header.css";
+import './Header.css';
 
 type HeaderProps = {
   home: string;
@@ -18,7 +18,7 @@ class Header extends React.Component<HeaderProps> {
             to="/"
             data-testid="main-link"
             className={({ isActive }): string =>
-              isActive ? "header__link_active" : "header__link"
+              isActive ? 'header__link_active' : 'header__link'
             }
           >
             {home}
@@ -27,7 +27,7 @@ class Header extends React.Component<HeaderProps> {
             to="/about"
             data-testid="about-link"
             className={({ isActive }): string =>
-              isActive ? "header__link_active" : "header__link"
+              isActive ? 'header__link_active' : 'header__link'
             }
           >
             {about}

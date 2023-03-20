@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import "./SearchBar.css";
+import './SearchBar.css';
 
 class SearchBar extends React.Component {
   state = {
-    search: "",
+    search: '',
   };
 
   handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +12,7 @@ class SearchBar extends React.Component {
   };
 
   componentDidMount = () => {
-    const searchStorage = localStorage.getItem("searchForm");
+    const searchStorage = localStorage.getItem('searchForm');
 
     if (searchStorage) {
       this.setState({ search: searchStorage });
@@ -20,7 +20,7 @@ class SearchBar extends React.Component {
   };
 
   componentWillUnmount = () => {
-    localStorage.setItem("searchForm", this.state.search);
+    localStorage.setItem('searchForm', this.state.search);
   };
 
   render() {
