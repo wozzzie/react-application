@@ -1,0 +1,28 @@
+.about__title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.about__img {
+  margin-top: 20px;
+  background-image: url('/img/about.jpeg');
+  background-position: center;
+  background-size: cover;
+  height: 346px;
+  width: 70%;
+}
+
+.about__page {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.about__message {
+  color: #349014;
+  width: 50%;
+  padding: 30px;
+}
