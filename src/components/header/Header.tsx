@@ -13,7 +13,6 @@ class Header extends React.Component<HeaderProps> {
     const { home, about } = this.props;
     return (
       <>
-        {console.log(this.props)}
         <header className="header">
           <div>
             <UNSAFE_LocationContext.Consumer>
