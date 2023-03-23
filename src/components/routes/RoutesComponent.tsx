@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import About from '../../screens/about/About';
 import Error from '../../screens/error/Error';
 import Home from '../../screens/home/Home';
+import NewCard from '../../screens/new-card/NewCard';
 class RoutesComponent extends Component {
   render(): JSX.Element {
     return (
@@ -31,6 +32,7 @@ class RoutesComponent extends Component {
           path="*"
           element={<Error errorMessage="Oops! Something went wrong. Please try again later." />}
         />
+        <Route data-testid="card-page" path="/card" element={<NewCard />} />
       </Routes>
     );
   }
