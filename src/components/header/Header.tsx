@@ -6,11 +6,12 @@ import './Header.css';
 type HeaderProps = {
   home: string;
   about: string;
+  card: string;
 };
 
 class Header extends React.Component<HeaderProps> {
   render(): JSX.Element {
-    const { home, about } = this.props;
+    const { home, about, card } = this.props;
     return (
       <>
         <header className="header">
@@ -22,7 +23,7 @@ class Header extends React.Component<HeaderProps> {
                     ? 'Home'
                     : value.location.pathname === '/about'
                     ? 'About'
-                    : ''}
+                    : 'Your card'}
                 </p>
               )}
             </UNSAFE_LocationContext.Consumer>
@@ -45,6 +46,15 @@ class Header extends React.Component<HeaderProps> {
               }
             >
               {about}
+            </NavLink>
+            <NavLink
+              to="/card"
+              data-testid="card-link"
+              className={({ isActive }): string =>
+                isActive ? 'header__link_active' : 'header__link'
+              }
+            >
+              {card}
             </NavLink>
           </div>
         </header>
