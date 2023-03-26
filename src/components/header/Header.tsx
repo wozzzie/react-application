@@ -13,7 +13,7 @@ class Header extends React.Component<HeaderProps> {
   render(): JSX.Element {
     const { home, about, card } = this.props;
     return (
-      <>
+      <div className="container">
         <header className="header">
           <div>
             <UNSAFE_LocationContext.Consumer>
@@ -23,7 +23,9 @@ class Header extends React.Component<HeaderProps> {
                     ? 'Home'
                     : value.location.pathname === '/about'
                     ? 'About'
-                    : 'Your card'}
+                    : value.location.pathname === '/card'
+                    ? 'Your card'
+                    : '404'}
                 </p>
               )}
             </UNSAFE_LocationContext.Consumer>
@@ -58,7 +60,7 @@ class Header extends React.Component<HeaderProps> {
             </NavLink>
           </div>
         </header>
-      </>
+      </div>
     );
   }
 }

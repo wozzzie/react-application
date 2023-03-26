@@ -16,26 +16,28 @@ class Home extends React.Component<HomeProps> {
     return (
       <div data-testid="main-page">
         <SearchBar />
-        <div className="home__wrapper">
-          <div className="home__card">
-            {DATA.map((card) => {
-              return (
-                <Card
-                  key={card.id}
-                  image={card.image}
-                  title={card.title}
-                  author={card.author}
-                  description={card.description}
-                  location={card.location}
-                  likes={card.likes}
-                  requirements={card.requirements}
-                />
-              );
-            })}
-          </div>
-          <div className="home__text">
-            <div className="home__advice">{advice}</div>
-            <div className="home__img"></div>
+        <div className="container">
+          <div className="home__wrapper">
+            <div className="home__card">
+              {DATA.map((card) => {
+                return (
+                  <Card
+                    key={card.id}
+                    image={card.image}
+                    title={card.title}
+                    author={card.author}
+                    description={card.description}
+                    location={card.location}
+                    likes={card.likes}
+                    requirements={card.requirements}
+                  />
+                );
+              })}
+            </div>
+            <div className="home__text">
+              <div className="home__advice">{advice}</div>
+              <div className="home__img"></div>
+            </div>
           </div>
         </div>
       </div>

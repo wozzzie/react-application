@@ -1,7 +1,6 @@
 .home__card {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
   gap: 20px;
   max-width: 60%;
@@ -15,7 +14,7 @@
 
 .home__wrapper {
   display: flex;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .home__img {
