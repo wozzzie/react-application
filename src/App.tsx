@@ -7,7 +7,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Header home={'Home page'} about={'About us'} />
+        <Header home={'Home page'} about={'About us'} card={'Create card'} />
         <RoutesComponent />
       </>
     );
