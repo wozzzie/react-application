@@ -27,7 +27,7 @@ class TextArea extends React.Component<TextAreaProps> {
           maxLength={maxLength}
         />
         {error && (
-          <div className="form__error" data-testid="form-error">
+          <div style={{ color: 'red' }} className="form__error" data-testid="form-error">
             {error}
           </div>
         )}

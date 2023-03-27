@@ -101,7 +101,7 @@ class Form extends React.Component<Record<string, never>, FormState> {
         cards: [...prevState.cards, newCard],
         errors: {},
       }));
-      // Reset form fields
+      alert('The form is submitted');
       if (this.authorInputRef.current) this.authorInputRef.current.value = '';
       if (this.requirementsRef.current) this.requirementsRef.current.value = '';
       if (this.dateInputRef.current) this.dateInputRef.current.value = '';
@@ -127,13 +127,13 @@ class Form extends React.Component<Record<string, never>, FormState> {
               <div className="form__credentials">
                 <TextInput
                   label="Name"
-                  defaultValue="Elon Mask"
+                  defaultValue=""
                   inputRef={this.authorInputRef}
                   error={errors.name}
                 />
                 <TextArea
                   label="Requirements"
-                  defaultValue="Requirements"
+                  defaultValue=""
                   textAreaRef={this.requirementsRef}
                   error={errors.requirements}
                   maxLength={100}
@@ -141,7 +141,7 @@ class Form extends React.Component<Record<string, never>, FormState> {
                 <DateInput label="Date" inputRef={this.dateInputRef} error={errors.date} />
                 <SelectInput
                   label="Location"
-                  defaultValue="Belarus"
+                  defaultValue=""
                   selectRef={this.selectRef}
                   error={errors.location}
                 />
