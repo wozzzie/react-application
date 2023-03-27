@@ -7,7 +7,7 @@ describe('Header component', () => {
   it('testing render the component', () => {
     const { getByTestId } = render(
       <Router>
-        <Header home={'Home page'} about={'About us'} />
+        <Header home={'Home page'} about={'About us'} card={'Your card'} />
       </Router>
     );
     expect(getByTestId('main-link')).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe('Header component', () => {
   it('testing Header home page text', () => {
     render(
       <Router>
-        <Header home={'Home page'} about={'About us'} />
+        <Header home={'Home page'} about={'About us'} card={'Your card'} />
       </Router>
     );
     const errorSubtitle = screen.queryByText(/Home page/i);
@@ -27,7 +27,7 @@ describe('Header component', () => {
   it('testing Header about us text', () => {
     render(
       <Router>
-        <Header home={'Home page'} about={'About us'} />
+        <Header home={'Home page'} about={'About us'} card={'Your card'} />
       </Router>
     );
     const errorSubtitle = screen.queryByText(/About us/i);
@@ -37,7 +37,7 @@ describe('Header component', () => {
   it('testing activation the link of the corresponding page', () => {
     const { getByTestId } = render(
       <Router>
-        <Header home={'Home page'} about={'About us'} />
+        <Header home={'Home page'} about={'About us'} card={'Your card'} />
       </Router>
     );
     const mainLink = getByTestId('main-link');
