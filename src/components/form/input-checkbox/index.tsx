@@ -26,7 +26,11 @@ class CheckboxInput extends React.Component<CheckboxInputProps> {
           <span></span>
           {label}
         </label>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {error && (
+          <div style={{ color: 'red' }} data-testid="form-error">
+            {error}
+          </div>
+        )}
       </div>
     );
   }

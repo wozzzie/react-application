@@ -13,10 +13,15 @@ class DateInput extends React.Component<DateInputProps> {
     const { label, error, inputRef } = this.props;
     return (
       <div className="block">
-        <label className="label">{label}: </label>
-        <input className="input" type="date" ref={inputRef} />
-
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        <label htmlFor="input-date" className="label">
+          {label}
+        </label>
+        <input id="input-date" className="input" type="date" ref={inputRef} />
+        {error && (
+          <div style={{ color: 'red' }} data-testid="form-error">
+            {error}
+          </div>
+        )}
       </div>
     );
   }

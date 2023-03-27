@@ -8,21 +8,29 @@ interface TextAreaProps {
   defaultValue: string;
   error?: string;
   textAreaRef?: RefObject<HTMLTextAreaElement>;
+  maxLength: number;
 }
 
 class TextArea extends React.Component<TextAreaProps> {
   render() {
-    const { label, defaultValue, error, textAreaRef } = this.props;
+    const { label, defaultValue, error, textAreaRef, maxLength } = this.props;
     return (
       <div className="block">
-        <label className="label">{label}</label>
+        <label htmlFor="textarea" className="label">
+          {label}
+        </label>
         <textarea
+          id="textarea"
           className="textarea"
           defaultValue={defaultValue}
           ref={textAreaRef}
-          maxLength={100}
+          maxLength={maxLength}
         />
-        {error && <div className="form__error">{error}</div>}
+        {error && (
+          <div className="form__error" data-testid="form-error">
+            {error}
+          </div>
+        )}
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import React, { ChangeEvent, RefObject } from 'react';
 
 import './style.css';
 import '../index.css';
@@ -6,8 +6,9 @@ import '../index.css';
 interface SelectInputProps {
   label: string;
   error?: string;
-  selectRef: RefObject<HTMLSelectElement>;
+  selectRef: RefObject<HTMLSelectElement> | null;
   defaultValue: string;
+  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 class SelectInput extends React.Component<SelectInputProps> {
@@ -16,7 +17,7 @@ class SelectInput extends React.Component<SelectInputProps> {
     return (
       <div className="block">
         <label htmlFor="select" className="label">
-          {label}:
+          {label}
         </label>
         <select id="select" className="select" ref={selectRef} defaultValue={defaultValue}>
           <option value="">Select an option</option>
@@ -25,7 +26,11 @@ class SelectInput extends React.Component<SelectInputProps> {
           <option value="Ukraine">Ukraine</option>
         </select>
 
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {error && (
+          <div style={{ color: 'red' }} data-testid="form-error">
+            {error}
+          </div>
+        )}
       </div>
     );
   }

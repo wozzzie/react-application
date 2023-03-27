@@ -7,6 +7,7 @@ interface FileInputProps {
   label: string;
   error?: string;
   inputFileRef: RefObject<HTMLInputElement>;
+  onChange?: (event: File) => void;
 }
 
 class FileInput extends React.Component<FileInputProps> {
@@ -20,7 +21,11 @@ class FileInput extends React.Component<FileInputProps> {
           </label>
           <input className="input_file" id="input_file" type="file" ref={inputFileRef} />
         </div>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {error && (
+          <div style={{ color: 'red' }} data-testid="form-error">
+            {error}
+          </div>
+        )}
       </div>
     );
   }

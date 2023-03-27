@@ -38,7 +38,11 @@ class RadioInput extends React.Component<RadioInputProps> {
             </label>
           </p>
         </div>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {error && (
+          <div style={{ color: 'red' }} data-testid="form-error">
+            {error}
+          </div>
+        )}
       </div>
     );
   }

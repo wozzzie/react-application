@@ -6,7 +6,8 @@ interface TitleInputProps {
   label: string;
   defaultValue: string;
   error?: string;
-  inputRef: RefObject<HTMLInputElement>;
+  inputRef?: RefObject<HTMLInputElement>;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 class TextInput extends React.Component<TitleInputProps> {
@@ -15,7 +16,7 @@ class TextInput extends React.Component<TitleInputProps> {
     return (
       <div className="block">
         <label htmlFor="input_text" className="label">
-          {label}:
+          {label}
         </label>
         <input
           id="input_text"
@@ -25,7 +26,11 @@ class TextInput extends React.Component<TitleInputProps> {
           ref={inputRef}
         />
 
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {error && (
+          <div style={{ color: 'red' }} data-testid="form-error">
+            {error}
+          </div>
+        )}
       </div>
     );
   }
