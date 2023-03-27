@@ -7,7 +7,6 @@ import './style.css';
 class FormCard extends React.Component<CardProps> {
   render() {
     const { authorName, requirements, date, location, title, isChecked, file } = this.props;
-    console.log(title);
     return (
       <div className="card_new">
         {file && (
