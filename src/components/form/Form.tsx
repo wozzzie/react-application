@@ -14,6 +14,7 @@ import {
 import { Card, FormState } from '../../types/form';
 
 import './Form.css';
+import Popup from './popup';
 
 class Form extends React.Component<Record<string, never>, FormState> {
   private authorInputRef = createRef<HTMLInputElement>();
@@ -30,6 +31,7 @@ class Form extends React.Component<Record<string, never>, FormState> {
     this.state = {
       cards: [],
       errors: {},
+      showPopup: false,
     };
   }
 
@@ -100,8 +102,8 @@ class Form extends React.Component<Record<string, never>, FormState> {
       this.setState((prevState) => ({
         cards: [...prevState.cards, newCard],
         errors: {},
+        showPopup: true,
       }));
-      alert('The form is submitted');
       if (this.authorInputRef.current) this.authorInputRef.current.value = '';
       if (this.requirementsRef.current) this.requirementsRef.current.value = '';
       if (this.dateInputRef.current) this.dateInputRef.current.value = '';
@@ -117,8 +119,12 @@ class Form extends React.Component<Record<string, never>, FormState> {
     }
   };
 
+  private handleClosePopup = () => {
+    this.setState({ showPopup: false });
+  };
+
   public render() {
-    const { cards, errors } = this.state;
+    const { cards, errors, showPopup } = this.state;
     return (
       <>
         <div className="form__container">
@@ -171,6 +177,13 @@ class Form extends React.Component<Record<string, never>, FormState> {
             </button>
           </form>
         </div>
+        {showPopup && (
+          <Popup
+            showPopup={showPopup}
+            message="The form is submitted"
+            onClose={this.handleClosePopup}
+          />
+        )}
         {cards.length > 0 && (
           <div className="cards__container">
             {cards.map((card) => (

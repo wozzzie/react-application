@@ -19,6 +19,7 @@ interface FormState {
     isChecked?: string;
     file?: string;
   };
+  showPopup: boolean;
 }
 
 interface CardProps {
