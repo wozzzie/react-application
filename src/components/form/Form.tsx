@@ -35,6 +35,7 @@ class Form extends React.Component<Record<string, never>, FormState> {
 
   private handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const now = new Date();
     const newCard: Card = {
       authorName: '',
       requirements: '',
@@ -45,6 +46,19 @@ class Form extends React.Component<Record<string, never>, FormState> {
       file: null,
     };
     const newErrors: FormState['errors'] = {};
+
+    const selectedDate = new Date(this.dateInputRef.current?.value ?? '');
+    if (!selectedDate || selectedDate < now) {
+      newErrors.date = 'Please select a date in the future';
+    } else {
+      newCard.date = this.dateInputRef.current?.value ?? '';
+    }
+
+    if (!this.dateInputRef.current?.value) {
+      newErrors.date = 'Date is required';
+    } else {
+      newCard.date = this.dateInputRef.current.value;
+    }
 
     if (!this.authorInputRef.current?.value) {
       newErrors.name = 'Name is required';
@@ -58,12 +72,6 @@ class Form extends React.Component<Record<string, never>, FormState> {
       newErrors.requirements = 'Field is required';
     } else {
       newCard.requirements = this.requirementsRef.current.value;
-    }
-
-    if (!this.dateInputRef.current?.value) {
-      newErrors.date = 'Date is required';
-    } else {
-      newCard.date = this.dateInputRef.current.value;
     }
 
     if (!this.selectRef.current?.value) {
@@ -114,7 +122,7 @@ class Form extends React.Component<Record<string, never>, FormState> {
     return (
       <>
         <div className="form__container">
-          <form className="form" onSubmit={this.handleSubmit}>
+          <form className="form" onSubmit={this.handleSubmit} data-testid="form-component">
             <div className="form__block">
               <div className="form__credentials">
                 <TextInput
@@ -128,6 +136,7 @@ class Form extends React.Component<Record<string, never>, FormState> {
                   defaultValue="Requirements"
                   textAreaRef={this.requirementsRef}
                   error={errors.requirements}
+                  maxLength={100}
                 />
                 <DateInput label="Date" inputRef={this.dateInputRef} error={errors.date} />
                 <SelectInput
@@ -157,7 +166,7 @@ class Form extends React.Component<Record<string, never>, FormState> {
                 error={errors.file}
               />
             </div>
-            <button className="form__btn" type="submit">
+            <button className="form__btn" type="submit" data-testid="submit-button">
               Submit
             </button>
           </form>
