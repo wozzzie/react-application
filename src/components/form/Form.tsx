@@ -66,12 +66,16 @@ class Form extends React.Component<Record<string, never>, FormState> {
       newErrors.name = 'Name is required';
     } else if (!/^[A-Z]/.test(this.authorInputRef.current.value)) {
       newErrors.name = 'Name must start with a capital letter';
+    } else if (this.authorInputRef.current?.value.length > 10) {
+      newErrors.name = 'Max length is 10 letters';
     } else {
       newCard.authorName = this.authorInputRef.current.value;
     }
 
     if (!this.requirementsRef.current?.value) {
       newErrors.requirements = 'Field is required';
+    } else if (this.requirementsRef.current?.value.length > 100) {
+      newErrors.requirements = 'Max length is 100 letters';
     } else {
       newCard.requirements = this.requirementsRef.current.value;
     }
@@ -142,7 +146,6 @@ class Form extends React.Component<Record<string, never>, FormState> {
                   defaultValue=""
                   textAreaRef={this.requirementsRef}
                   error={errors.requirements}
-                  maxLength={100}
                 />
                 <DateInput label="Date" inputRef={this.dateInputRef} error={errors.date} />
                 <SelectInput
