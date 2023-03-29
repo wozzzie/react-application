@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.newcard__text {
+  font-size: 26px;
+  color: #ffc107;
+}
+
+.newcard__text > p {
+  font-size: 24px;
+}
+
+.newcard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}

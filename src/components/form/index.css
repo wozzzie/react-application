@@ -1,0 +1,28 @@
+.label {
+  font-weight: 600;
+  font-size: 16px;
+  color: #6c8870;
+}
+
+.block {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  margin-top: 5px;
+  color: #666666;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 16px;
+  width: 364px;
+  height: 56px;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+}
+
+.input:focus {
+  outline: none;
+}

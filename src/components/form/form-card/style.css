@@ -1,0 +1,24 @@
+.card_new {
+  width: 310px;
+  height: 475px;
+  background-color: #a5d2ce9e;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.card_new__img {
+  width: 279px;
+  height: 279px;
+}
+
+.card_new__text {
+  font-size: 18px;
+  color: #004f44;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card_new__thank {
+  color: #ffc107;
+}

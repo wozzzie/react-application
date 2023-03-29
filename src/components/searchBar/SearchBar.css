@@ -1,0 +1,36 @@
+.search-form__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-form {
+  position: relative;
+}
+
+.search-form__input {
+  width: 650px;
+  height: 40px;
+  border: 1px solid white;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.search-form__input:focus {
+  outline: none;
+}
+
+.search-form__loop:hover {
+  transform: scale(1.2);
+}
+
+.search-form__loop {
+  right: 7px;
+  top: 8px;
+  position: absolute;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  transition: 0.5s all;
+}
