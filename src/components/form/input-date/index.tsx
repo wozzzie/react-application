@@ -1,29 +1,35 @@
-import React, { RefObject } from 'react';
+import React from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { FormValues } from '../../../types/form';
 
 import '../index.css';
 
 interface DateInputProps {
   label: string;
   error?: string;
-  inputRef: RefObject<HTMLInputElement>;
+  register: UseFormRegister<FormValues>;
+  name: keyof FormValues;
 }
 
-class DateInput extends React.Component<DateInputProps> {
-  render() {
-    const { label, error, inputRef } = this.props;
-    return (
-      <div className="block">
-        <label htmlFor="input-date" className="label">
-          {label}
-        </label>
-        <input id="input-date" className="input" type="date" ref={inputRef} />
-        {error && (
-          <div style={{ color: 'red' }} data-testid="form-error">
-            {error}
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+const DateInput: React.FC<DateInputProps> = ({ label, error, name, register }) => {
+  return (
+    <div className="block">
+      <label htmlFor={name} className="label">
+        {label}
+      </label>
+      <input
+        id={name}
+        className="input"
+        type="date"
+        {...register(name, { required: 'Date is required' })}
+      />
+      {error && (
+        <div style={{ color: 'red' }} data-testid="form-error">
+          {error}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default DateInput;
