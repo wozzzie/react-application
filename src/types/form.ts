@@ -32,4 +32,14 @@ interface CardProps {
   file: File | null;
 }
 
-export type { Card, FormState, CardProps };
+interface FormValues {
+  authorName: string;
+  requirements: string;
+  date: string;
+  location: string;
+  title: string;
+  isChecked: boolean;
+  file: FileList;
+}
+
+export type { Card, FormState, CardProps, FormValues };

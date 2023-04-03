@@ -1,42 +1,55 @@
-import React, { createRef } from 'react';
+import React from 'react';
+import { vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-import { it, expect } from 'vitest';
-import { render, fireEvent, screen } from '@testing-library/react';
 import { TextArea } from '../../../components/form';
 
 describe('TextArea', () => {
-  it('renders correctly', () => {
-    render(<TextArea label="Label" defaultValue="I am a plant" maxLength={100} />);
-    const label = screen.getByLabelText('Label');
-    const textarea = screen.getByRole('textbox', { name: 'Label' });
-    expect(label).toBeInTheDocument();
-    expect(textarea).toBeInTheDocument();
-    expect(textarea).toHaveValue('I am a plant');
+  const label = 'My Label';
+  const defaultValue = 'My Default Value';
+  const maxLengthError = 'Max length is 200 characters';
+  const requiredError = 'Field is required';
+
+  it('renders label and default value correctly', () => {
+    render(
+      <TextArea label={label} defaultValue={defaultValue} register={vi.fn()} name="requirements" />
+    );
+
+    expect(screen.getByLabelText(label)).toHaveValue(defaultValue);
   });
 
-  it('updates value on input', () => {
-    const newValue = 'I am not a plant';
-    const textAreaRef = createRef<HTMLTextAreaElement>();
-    const { getByLabelText } = render(
+  it('displays an error message if the field is required and no value is provided', async () => {
+    render(
       <TextArea
-        label="Label"
-        defaultValue="I am a plant"
-        textAreaRef={textAreaRef}
-        maxLength={100}
+        label={label}
+        defaultValue={defaultValue}
+        register={vi.fn()}
+        name="requirements"
+        error={requiredError}
       />
     );
 
-    const textarea = getByLabelText('Label');
-    fireEvent.change(textarea, { target: { value: newValue } });
-    expect(textAreaRef.current?.value).toBe(newValue);
+    const textarea = screen.getByLabelText(label);
+    userEvent.clear(textarea);
+    userEvent.tab();
+
+    expect(await screen.findByTestId('form-error')).toHaveTextContent(requiredError);
   });
 
-  it('shows error message', () => {
-    const errorMessage = 'This field is required.';
-    const { getByText } = render(
-      <TextArea label="Label" defaultValue="" error={errorMessage} maxLength={100} />
+  it('displays an error message if the input exceeds the maximum length', () => {
+    const longValue = 'a'.repeat(201);
+    const { getByLabelText, getByTestId } = render(
+      <TextArea
+        label={label}
+        defaultValue={defaultValue}
+        register={vi.fn()}
+        name="requirements"
+        error={maxLengthError}
+      />
     );
-    const error = getByText(errorMessage);
-    expect(error).toBeInTheDocument();
+    const input = getByLabelText(label);
+    fireEvent.change(input, { target: { value: longValue } });
+    expect(getByTestId('form-error')).toHaveTextContent(maxLengthError);
   });
 });

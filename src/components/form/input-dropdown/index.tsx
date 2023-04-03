@@ -1,4 +1,6 @@
-import React, { ChangeEvent, RefObject } from 'react';
+import React from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { FormValues } from '../../../types/form';
 
 import './style.css';
 import '../index.css';
@@ -6,34 +8,43 @@ import '../index.css';
 interface SelectInputProps {
   label: string;
   error?: string;
-  selectRef: RefObject<HTMLSelectElement> | null;
   defaultValue: string;
-  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
+  register: UseFormRegister<FormValues>;
+  name: keyof FormValues;
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-class SelectInput extends React.Component<SelectInputProps> {
-  render() {
-    const { label, error, selectRef, defaultValue } = this.props;
-    return (
-      <div className="block">
-        <label htmlFor="select" className="label">
-          {label}
-        </label>
-        <select id="select" className="select" ref={selectRef} defaultValue={defaultValue}>
-          <option value="">Select an option</option>
-          <option value="Belarus">Belarus</option>
-          <option value="Poland">Poland</option>
-          <option value="Ukraine">Ukraine</option>
-        </select>
+const SelectInput: React.FC<SelectInputProps> = ({
+  label,
+  error,
+  defaultValue,
+  register,
+  name,
+}) => {
+  return (
+    <div className="block">
+      <label htmlFor={name} className="label">
+        {label}
+      </label>
+      <select
+        id={name}
+        className="select"
+        defaultValue={defaultValue}
+        {...register(name, { required: 'Location is required' })}
+      >
+        <option value="">Select an option</option>
+        <option value="Belarus">Belarus</option>
+        <option value="Poland">Poland</option>
+        <option value="Ukraine">Ukraine</option>
+      </select>
 
-        {error && (
-          <div style={{ color: 'red' }} data-testid="form-error">
-            {error}
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+      {error && (
+        <div style={{ color: 'red' }} data-testid="form-error">
+          {error}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default SelectInput;

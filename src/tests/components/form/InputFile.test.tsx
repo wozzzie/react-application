@@ -1,42 +1,36 @@
-import React, { createRef } from 'react';
-
-import { render, fireEvent } from '@testing-library/react';
-import { FileInput } from '../../../components/form';
+import React from 'react';
 import { vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { FileInput } from '../../../components/form';
+
+import { FormValues } from '../../../types/form';
 
 describe('FileInput', () => {
-  it('render the label', () => {
-    const label = 'Choose file';
-    const { getByLabelText } = render(<FileInput label={label} inputFileRef={createRef()} />);
-    expect(getByLabelText(label)).toBeInTheDocument();
+  const mockRegister = vi.fn();
+  const mockOnChange = vi.fn();
+  const defaultProps = {
+    label: 'Test Label',
+    error: 'Test Error',
+    onChange: mockOnChange,
+    register: mockRegister,
+    name: 'name' as keyof FormValues,
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('render type file', () => {
-    const { getByLabelText } = render(<FileInput label="Choose file" inputFileRef={createRef()} />);
-    const inputElement = getByLabelText('Choose file') as HTMLInputElement;
-    expect(inputElement.type).toBe('file');
+  it('should render the component with a label and input', () => {
+    render(<FileInput {...defaultProps} />);
+
+    expect(screen.getByLabelText('Test Label')).toBeInTheDocument();
+    expect(screen.getByLabelText('Test Label')).toHaveAttribute('type', 'file');
   });
 
-  it('should call the onChange function when a file is selected', () => {
-    const onChange = vi.fn<[File]>();
-    const inputFileRef = createRef<HTMLInputElement>();
-    const { getByLabelText } = render(
-      <FileInput label="Choose file" inputFileRef={inputFileRef} onChange={onChange} />
-    );
-    const file = new File(['hello'], 'hello.txt', { type: 'text/plain' });
-    const fileObjectUrl = 'https://example.com/file.txt';
-    window.URL.createObjectURL = vi.fn(() => fileObjectUrl);
-    const inputElement = getByLabelText('Choose file') as HTMLInputElement;
-    fireEvent.change(inputElement, { target: { files: [file] } });
-    expect(inputElement.files).toHaveLength(1);
-    expect(inputElement.files?.[0]).toBe(file);
-  });
+  it('should show an error message if there is an error', () => {
+    render(<FileInput {...defaultProps} />);
+    const error = screen.getByTestId('form-error');
 
-  it('render the error message', () => {
-    const error = 'File size exceeds the limit';
-    const { getByText } = render(
-      <FileInput label="Choose file" error={error} inputFileRef={createRef()} />
-    );
-    expect(getByText(error)).toBeInTheDocument();
+    expect(error).toHaveTextContent('Test Error');
   });
 });

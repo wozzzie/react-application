@@ -1,4 +1,6 @@
-import React, { RefObject } from 'react';
+import React from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { FormValues } from '../../../types/form';
 
 import './style.css';
 import '../index.css';
@@ -6,29 +8,32 @@ import '../index.css';
 interface FileInputProps {
   label: string;
   error?: string;
-  inputFileRef: RefObject<HTMLInputElement>;
   onChange?: (event: File) => void;
+  register: UseFormRegister<FormValues>;
+  name: keyof FormValues;
 }
 
-class FileInput extends React.Component<FileInputProps> {
-  render() {
-    const { label, error, inputFileRef } = this.props;
-    return (
-      <div className="block">
-        <div className="input__block">
-          <label htmlFor="input_file" className="input_file__label">
-            {label}
-          </label>
-          <input className="input_file" id="input_file" type="file" ref={inputFileRef} />
-        </div>
-        {error && (
-          <div style={{ color: 'red' }} data-testid="form-error">
-            {error}
-          </div>
-        )}
+const FileInput: React.FC<FileInputProps> = ({ label, error, register, name }) => {
+  return (
+    <div className="block">
+      <div className="input__block">
+        <label htmlFor={name} className="input_file__label">
+          {label}
+        </label>
+        <input
+          className="input_file"
+          id={name}
+          type="file"
+          {...register(name, { required: 'File is required' })}
+        />
       </div>
-    );
-  }
-}
+      {error && (
+        <div style={{ color: 'red' }} data-testid="form-error">
+          {error}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default FileInput;

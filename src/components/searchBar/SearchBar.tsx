@@ -1,45 +1,40 @@
-import React from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
 import './SearchBar.css';
 
-class SearchBar extends React.Component {
-  state = {
-    search: '',
+const SearchBar = () => {
+  const [search, setSearch] = useState(localStorage.getItem('searchForm') ?? '');
+
+  const inputRef = useRef(search);
+
+  useEffect(() => {
+    inputRef.current = search;
+  }, [search]);
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('searchForm', inputRef.current);
+    };
+  }, []);
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
   };
 
-  handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ search: event.target.value });
-  };
-
-  componentDidMount = () => {
-    const searchStorage = localStorage.getItem('searchForm');
-
-    if (searchStorage) {
-      this.setState({ search: searchStorage });
-    }
-  };
-
-  componentWillUnmount = () => {
-    localStorage.setItem('searchForm', this.state.search);
-  };
-
-  render() {
-    return (
-      <div className="search-form__wrapper">
-        <form className="search-form">
-          <input
-            data-testid="search-input"
-            className="search-form__input"
-            type="search"
-            value={this.state.search}
-            onChange={this.handleSearchChange}
-            placeholder="Search for a plant..."
-          />
-          <img src="/img/search.png" alt="loop" className="search-form__loop" />
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="search-form__wrapper">
+      <form className="search-form">
+        <input
+          data-testid="search-input"
+          className="search-form__input"
+          type="search"
+          value={search}
+          onChange={handleSearchChange}
+          placeholder="Search for a plant..."
+        />
+        <img src="/img/search.png" alt="loop" className="search-form__loop" />
+      </form>
+    </div>
+  );
+};
 
 export default SearchBar;

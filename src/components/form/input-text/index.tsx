@@ -1,39 +1,48 @@
-import React, { RefObject } from 'react';
+import React from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { FormValues } from '../../../types/form';
 
 import '../index.css';
 
-interface TitleInputProps {
+interface TextInputProps {
   label: string;
   defaultValue: string;
   error?: string;
-  inputRef?: RefObject<HTMLInputElement>;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  register: UseFormRegister<FormValues>;
+  name: keyof FormValues;
 }
 
-class TextInput extends React.Component<TitleInputProps> {
-  render() {
-    const { label, defaultValue, error, inputRef } = this.props;
-    return (
-      <div className="block">
-        <label htmlFor="input_text" className="label">
-          {label}
-        </label>
-        <input
-          id="input_text"
-          className="input"
-          type="text"
-          defaultValue={defaultValue}
-          ref={inputRef}
-        />
+const TextInput: React.FC<TextInputProps> = ({ label, defaultValue, error, register, name }) => {
+  return (
+    <div className="block">
+      <label htmlFor={name} className="label">
+        {label}
+      </label>
+      <input
+        id={name}
+        className="input"
+        type="text"
+        defaultValue={defaultValue}
+        {...register(name, {
+          required: 'Name is required',
+          pattern: {
+            value: /^[A-Z]/,
+            message: 'Name must start with a capital letter',
+          },
+          maxLength: {
+            value: 10,
+            message: 'Max length is 10 letters',
+          },
+        })}
+      />
 
-        {error && (
-          <div style={{ color: 'red' }} data-testid="form-error">
-            {error}
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+      {error && (
+        <div style={{ color: 'red' }} data-testid="form-error">
+          {error}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default TextInput;

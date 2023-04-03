@@ -1,38 +1,36 @@
 import React from 'react';
+import { vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 
-import { test, vi } from 'vitest';
-import { render, fireEvent } from '@testing-library/react';
 import Popup from '../../../components/form/popup';
 
-test('Popup renders correctly when showPopup is true', () => {
-  const { getByText } = render(
-    <Popup message="Test message" onClose={() => {}} showPopup={true} />
-  );
-  const popupElement = getByText('Hooray!');
-  const messageElement = getByText('Test message');
-  const buttonElement = getByText('OK');
+describe('Popup', () => {
+  const handleClosePopup = vi.fn();
+  const message = 'This is a test message';
 
-  expect(popupElement).toBeInTheDocument();
-  expect(messageElement).toBeInTheDocument();
-  expect(buttonElement).toBeInTheDocument();
-});
+  beforeEach(() => {
+    handleClosePopup.mockClear();
+  });
 
-test('Popup does not render when showPopup is false', () => {
-  const { queryByText } = render(
-    <Popup message="Test message" onClose={() => {}} showPopup={false} />
-  );
-  const popupElement = queryByText('Hooray!');
+  it('renders correctly', () => {
+    render(<Popup message={message} handleClosePopup={handleClosePopup} showPopup={true} />);
 
-  expect(popupElement).toBeInTheDocument();
-});
+    expect(screen.queryByText('Hooray!')).toBeInTheDocument();
+    expect(screen.queryByText(message)).toBeInTheDocument();
+    expect(screen.queryByText('OK')).toBeInTheDocument();
+  });
 
-test('onClose is called when OK button is clicked', () => {
-  const onCloseMock = vi.fn();
-  const { getByText } = render(
-    <Popup message="Test message" onClose={onCloseMock} showPopup={true} />
-  );
-  const buttonElement = getByText('OK');
+  it('calls handleClosePopup when OK button is clicked', () => {
+    render(<Popup message={message} handleClosePopup={handleClosePopup} showPopup={true} />);
 
-  fireEvent.click(buttonElement);
-  expect(onCloseMock).toHaveBeenCalledTimes(1);
+    fireEvent.click(screen.getByText('OK'));
+
+    expect(handleClosePopup).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId('popup-container')).toHaveClass('popup popup__open');
+  });
+
+  it('does not render when showPopup is false', () => {
+    render(<Popup message={message} handleClosePopup={handleClosePopup} showPopup={false} />);
+    expect(screen.getByTestId('popup-container')).toHaveClass('popup');
+  });
 });

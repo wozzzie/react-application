@@ -1,4 +1,6 @@
-import React, { RefObject } from 'react';
+import React from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { FormValues } from '../../../types/form';
 
 import './style.css';
 import '../index.css';
@@ -7,33 +9,37 @@ interface CheckboxInputProps {
   label: string;
   defaultChecked: boolean;
   error?: string;
-  checkboxRef: RefObject<HTMLInputElement>;
+  register: UseFormRegister<FormValues>;
+  name: keyof FormValues;
 }
 
-class CheckboxInput extends React.Component<CheckboxInputProps> {
-  render() {
-    const { label, defaultChecked, error, checkboxRef } = this.props;
-    return (
-      <div className="block">
-        <input
-          id="input_checkbox"
-          className="input_checkbox"
-          type="checkbox"
-          defaultChecked={defaultChecked}
-          ref={checkboxRef}
-        />
-        <label htmlFor="input_checkbox" className="input_checkbox__label">
-          <span></span>
-          {label}
-        </label>
-        {error && (
-          <div style={{ color: 'red' }} data-testid="form-error">
-            {error}
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+const CheckboxInput: React.FC<CheckboxInputProps> = ({
+  label,
+  defaultChecked,
+  error,
+  register,
+  name,
+}) => {
+  return (
+    <div className="block">
+      <input
+        id={name}
+        className="input_checkbox"
+        type="checkbox"
+        defaultChecked={defaultChecked}
+        {...register(name, { required: 'Checkbox must be checked' })}
+      />
+      <label htmlFor={name} className="input_checkbox__label">
+        <span></span>
+        {label}
+      </label>
+      {error && (
+        <div style={{ color: 'red' }} data-testid="form-error">
+          {error}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default CheckboxInput;

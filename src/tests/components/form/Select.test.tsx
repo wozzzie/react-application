@@ -1,52 +1,44 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
+import { vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 
-import { assert, it } from 'vitest';
-import { render, fireEvent } from '@testing-library/react';
 import { SelectInput } from '../../../components/form';
 
-describe('Select', () => {
-  it('renders the label and options', () => {
-    const options = ['Belarus', 'Poland', 'Ukraine'];
-    const label = 'Location';
-
-    const { getByLabelText } = render(
-      <SelectInput label={label} selectRef={null} defaultValue="Belarus" />
-    );
-    const select = getByLabelText(label) as HTMLSelectElement;
-    expect(select.options.length).toBe(options.length + 1);
+describe('SelectInput', () => {
+  it('renders label and options correctly', () => {
+    render(<SelectInput label="Location" defaultValue="" register={vi.fn()} name="location" />);
+    const labelElement = screen.getByText('Location');
+    expect(labelElement).toBeInTheDocument();
+    const optionElements = screen.getAllByRole('option');
+    expect(optionElements.length).toBe(4);
+    expect(optionElements[0]).toHaveValue('');
+    expect(optionElements[1]).toHaveValue('Belarus');
+    expect(optionElements[2]).toHaveValue('Poland');
+    expect(optionElements[3]).toHaveValue('Ukraine');
   });
 
-  it('renders the default value', () => {
-    const label = 'Country';
-    const defaultValue = 'Poland';
-
-    const { getByLabelText } = render(
-      <SelectInput label={label} selectRef={null} defaultValue={defaultValue} />
+  it('sets the default value correctly', () => {
+    render(
+      <SelectInput label="Location" defaultValue="Poland" register={vi.fn()} name="location" />
     );
-    const select = getByLabelText(label) as HTMLSelectElement;
-    assert.equal(select.value, defaultValue);
+    const optionElement = screen.getByDisplayValue('Poland');
+    expect(optionElement).toBeInTheDocument();
   });
 
-  it('test the onChange handler', () => {
-    const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
-      const newValue = event.target.value;
-      expect(newValue).toBe('Belarus');
-    };
-    const { getByLabelText } = render(
-      <SelectInput label={'label'} selectRef={null} defaultValue={''} onChange={onChange} />
+  it('displays an error message when no option is selected', async () => {
+    const registerMock = vi.fn();
+    render(
+      <SelectInput
+        label="Location"
+        defaultValue=""
+        register={registerMock}
+        name="location"
+        error="Location is required"
+      />
     );
-    const select = getByLabelText('label') as HTMLSelectElement;
-    fireEvent.change(select, { target: { value: 'Belarus' } });
-  });
-
-  it('renders the error message', () => {
-    const label = 'Country';
-    const error = 'Please select a country';
-
-    const { getByText } = render(
-      <SelectInput label={label} selectRef={null} defaultValue="" error={error} />
-    );
-    const errorElement = getByText(error);
-    assert.ok(errorElement);
+    const selectElement = screen.getByRole('combobox');
+    fireEvent.blur(selectElement);
+    const errorElement = await screen.findByTestId('form-error');
+    expect(errorElement).toHaveTextContent('Location is required');
   });
 });

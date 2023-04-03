@@ -4,25 +4,22 @@ import './style.css';
 
 interface PopupProps {
   message: string;
-  onClose: () => void;
+  handleClosePopup: () => void;
   showPopup: boolean;
 }
 
-class Popup extends React.Component<PopupProps> {
-  render() {
-    const { message, onClose, showPopup } = this.props;
-    return (
-      <div className={`popup ${showPopup ? 'popup__open' : ''}`}>
-        <div className="popup__content">
-          <h2>Hooray!</h2>
-          <p className="popup__message">{message}</p>
-          <button className="popup__button" onClick={onClose}>
-            OK
-          </button>
-        </div>
+const Popup: React.FC<PopupProps> = ({ message, handleClosePopup, showPopup }) => {
+  return (
+    <div className={`popup ${showPopup ? 'popup__open' : ''}`} data-testid="popup-container">
+      <div className="popup__content">
+        <h2>Hooray!</h2>
+        <p className="popup__message">{message}</p>
+        <button className="popup__button" onClick={handleClosePopup}>
+          OK
+        </button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Popup;
