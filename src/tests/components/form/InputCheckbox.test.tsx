@@ -7,7 +7,7 @@ import { CheckboxInput } from '../../../components/form';
 
 describe('CheckboxInput', () => {
   test('renders the checkbox input', () => {
-    const { container } = render(
+    const { getByLabelText } = render(
       <CheckboxInput
         label="Checkbox Label"
         defaultChecked={false}
@@ -16,9 +16,9 @@ describe('CheckboxInput', () => {
       />
     );
 
-    const checkboxInput = container.querySelector('input[type="checkbox"]');
+    const checkboxInput = getByLabelText('Checkbox Label') as HTMLInputElement;
     expect(checkboxInput).toBeInTheDocument();
-    expect(checkboxInput).not.toBeChecked();
+    expect(checkboxInput.checked).toBe(false);
   });
 
   test('renders the label for the checkbox', () => {
