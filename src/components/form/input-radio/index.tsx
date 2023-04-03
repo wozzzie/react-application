@@ -16,7 +16,9 @@ interface RadioInputProps {
 const RadioInput: React.FC<RadioInputProps> = ({ label, name, register, options, error }) => {
   return (
     <div className="block">
-      <label className="label">{label}</label>
+      <label htmlFor={`${name}-1`} className="label">
+        {label}
+      </label>
       <div className="input_radio-buttons">
         <p>
           <input

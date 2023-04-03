@@ -1,34 +1,76 @@
 import React from 'react';
+import { vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-import { fireEvent, render, screen } from '@testing-library/react';
 import { CheckboxInput } from '../../../components/form';
 
 describe('CheckboxInput', () => {
-  const checkboxRef = { current: null };
-  const label = 'I consent to my personal data';
-  const error = 'Please consent to personal data';
-
-  beforeEach(() => {
-    render(
-      <CheckboxInput label={label} defaultChecked={false} error={error} checkboxRef={checkboxRef} />
+  test('renders the checkbox input', () => {
+    const { container } = render(
+      <CheckboxInput
+        label="Checkbox Label"
+        defaultChecked={false}
+        register={vi.fn()}
+        name="isChecked"
+      />
     );
+
+    const checkboxInput = container.querySelector('input[type="checkbox"]');
+    expect(checkboxInput).toBeInTheDocument();
+    expect(checkboxInput).not.toBeChecked();
   });
 
-  it('render a label', () => {
-    expect(screen.getByText(label)).toBeInTheDocument();
+  test('renders the label for the checkbox', () => {
+    const { getByText } = render(
+      <CheckboxInput
+        label="Checkbox Label"
+        defaultChecked={false}
+        register={vi.fn()}
+        name="isChecked"
+      />
+    );
+
+    expect(getByText('Checkbox Label')).toBeInTheDocument();
   });
 
-  it('render a checkbox', () => {
-    expect(checkboxRef.current).toBeInstanceOf(HTMLInputElement);
+  test('renders an error message if an error is provided', () => {
+    const errorMessage = 'This is an error message';
+
+    render(
+      <CheckboxInput
+        label="Checkbox Label"
+        defaultChecked={false}
+        error={errorMessage}
+        register={vi.fn()}
+        name="isChecked"
+      />
+    );
+
+    const errorElement = screen.getByTestId('form-error');
+    expect(errorElement).toBeInTheDocument();
+    expect(errorElement).toHaveTextContent(errorMessage);
   });
 
-  it('render an error message', () => {
-    expect(screen.getByText(error)).toBeInTheDocument();
-  });
+  test('calls the register function with the correct parameters when checkbox is checked', () => {
+    const registerFunction = vi.fn();
+    const checkboxName = 'isChecked';
 
-  it('check the checkbox when clicked', () => {
-    const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
-    fireEvent.click(checkbox);
-    expect(checkbox.checked).toBe(true);
+    render(
+      <CheckboxInput
+        label="Checkbox Label"
+        defaultChecked={false}
+        register={registerFunction}
+        name={checkboxName}
+      />
+    );
+
+    const checkboxInput = screen.getByLabelText('Checkbox Label');
+    userEvent.click(checkboxInput);
+
+    expect(registerFunction).toHaveBeenCalledTimes(1);
+    expect(registerFunction).toHaveBeenCalledWith(checkboxName, {
+      required: 'Checkbox must be checked',
+    });
   });
 });

@@ -1,69 +1,32 @@
+import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
+import { vi } from 'vitest';
 
-import { it, expect } from 'vitest';
-import { fireEvent, render } from '@testing-library/react';
 import { RadioInput } from '../../../components/form';
 
-describe('Input text', () => {
-  it('renders a radio input group with two options', () => {
-    const inputRef1 = { current: null };
-    const inputRef2 = { current: null };
-    const options = ['Option 1', 'Option 2'];
+describe('RadioInput', () => {
+  const options = ['Option 1', 'Option 2'];
+  const label = 'Select an option';
+  const name = 'title';
+
+  it('renders label and options', () => {
+    render(<RadioInput label={label} name={name} register={vi.fn()} options={options} />);
+
+    expect(screen.getByText(label)).toBeInTheDocument();
+    expect(screen.getByText(options[0])).toBeInTheDocument();
+    expect(screen.getByText(options[1])).toBeInTheDocument();
+  });
+
+  it('displays an error message when no option is selected', async () => {
+    const error = 'At least one option must be selected';
     render(
-      <RadioInput
-        label="Select an option"
-        name="option"
-        options={options}
-        inputRef1={inputRef1}
-        inputRef2={inputRef2}
-      />
+      <RadioInput label={label} name={name} register={vi.fn()} options={options} error={error} />
     );
-    expect(inputRef1.current).toBeInTheDocument();
-    expect(inputRef2.current).toBeInTheDocument();
-    expect(inputRef1.current).not.toBeChecked();
-    expect(inputRef2.current).not.toBeChecked();
-  });
 
-  it('clicking an option selects it', () => {
-    const inputRef1 = { current: { checked: false } } as React.RefObject<HTMLInputElement>;
-    const inputRef2 = { current: { checked: false } } as React.RefObject<HTMLInputElement>;
+    const input = screen.getByTestId('new-input');
+    fireEvent.submit(input);
 
-    const options = ['Option 1', 'Option 2'];
-    const { getByLabelText } = render(
-      <RadioInput
-        label="Select an option"
-        name="option"
-        options={options}
-        inputRef1={inputRef1}
-        inputRef2={inputRef2}
-      />
-    );
-    const option1 = getByLabelText(options[0]) as HTMLInputElement;
-    const option2 = getByLabelText(options[1]) as HTMLInputElement;
-
-    fireEvent.click(option1);
-
-    expect(option1.checked).toBe(true);
-    expect(option2.checked).toBe(false);
-  });
-
-  it('displays an error message', () => {
-    const inputRef1 = { current: null };
-    const inputRef2 = { current: null };
-    const options = ['Option 1', 'Option 2'];
-    const errorMessage = 'Please select an option';
-    const { getByText } = render(
-      <RadioInput
-        label="Select an option"
-        name="option"
-        options={options}
-        inputRef1={inputRef1}
-        inputRef2={inputRef2}
-        error={errorMessage}
-      />
-    );
-    const error = getByText(errorMessage);
-    expect(error).toBeInTheDocument();
-    expect(error).toHaveStyle('color: red');
+    const errorMessage = await screen.findByTestId('form-error');
+    expect(errorMessage).toHaveTextContent(error);
   });
 });

@@ -10,7 +10,7 @@ interface PopupProps {
 
 const Popup: React.FC<PopupProps> = ({ message, handleClosePopup, showPopup }) => {
   return (
-    <div className={`popup ${showPopup ? 'popup__open' : ''}`}>
+    <div className={`popup ${showPopup ? 'popup__open' : ''}`} data-testid="popup-container">
       <div className="popup__content">
         <h2>Hooray!</h2>
         <p className="popup__message">{message}</p>

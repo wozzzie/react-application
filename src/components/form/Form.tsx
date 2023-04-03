@@ -103,7 +103,7 @@ const Form = () => {
               error={errors.file?.message}
             />
           </div>
-          <button className="form__btn" type="submit">
+          <button className="form__btn" type="submit" data-testid="submit-button">
             Submit
           </button>
         </form>
