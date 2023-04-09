@@ -42,4 +42,15 @@ interface FormValues {
   file: FileList;
 }
 
-export type { Card, FormState, CardProps, FormValues };
+type CardType = {
+  id: string;
+  image: string;
+  title: string;
+  author: string;
+  description: string;
+  location: string;
+  likes: string;
+  requirements: string;
+};
+
+export type { Card, FormState, CardProps, FormValues, CardType };
