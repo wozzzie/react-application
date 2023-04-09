@@ -5,6 +5,7 @@ import SearchBar from '../../components/searchBar/SearchBar';
 import './Home.css';
 import { data } from '../../data/data';
 import filteredData from '../../components/filteredData/filteredData';
+import Loader from '../../components/loader/loader';
 
 interface HomeProps {
   advice: string;
@@ -13,12 +14,15 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ advice }) => {
   const [cards, setCards] = useState<CardType[]>([]);
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSearchSubmit = async (searchTerm: string) => {
+    setLoading(true);
     const response = await fetch(`https://mock-server-api-two.vercel.app/catalog?q=${searchTerm}`);
     const data = await response.json();
     setCards(data);
     setSearch(searchTerm);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -45,9 +49,9 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
       <div className="container">
         <div className="home__wrapper">
           <div className="home__card">
-            {cards.length === 0 ? (
-              <div className="home__no-results">No results found for &quot;{search}&quot;</div>
-            ) : (
+            {loading ? (
+              <Loader />
+            ) : cards.length ? (
               cards.map((card) => (
                 <Card
                   key={card.id}
@@ -60,6 +64,8 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
                   requirements={card.requirements}
                 />
               ))
+            ) : (
+              <div className="no-results">No results found.</div>
             )}
           </div>
           <div className="home__text">
