@@ -6,6 +6,7 @@ import './Home.css';
 import { data } from '../../data/data';
 import filteredData from '../../components/filteredData/filteredData';
 import Loader from '../../components/loader/loader';
+import CardModal from '../../components/cardModal/cardModal';
 
 interface HomeProps {
   advice: string;
@@ -15,6 +16,8 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
   const [cards, setCards] = useState<CardType[]>([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSearchSubmit = async (searchTerm: string) => {
     setLoading(true);
@@ -43,6 +46,16 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
     setCards(filteredCards);
   }, [search]);
 
+  const handleCardClick = (card: CardType) => {
+    setSelectedCard(card);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedCard(null);
+    setIsModalOpen(false);
+  };
+
   return (
     <div data-testid="main-page">
       <SearchBar onSubmit={handleSearchSubmit} />
@@ -58,10 +71,11 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
                   image={card.image}
                   title={card.title}
                   author={card.author}
-                  description={card.description}
+                  // description={card.description}
                   location={card.location}
                   likes={card.likes}
-                  requirements={card.requirements}
+                  // requirements={card.requirements}
+                  onClick={() => handleCardClick(card)}
                 />
               ))
             ) : (
@@ -74,6 +88,20 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
           </div>
         </div>
       </div>
+      {selectedCard && (
+        <CardModal
+          card={selectedCard}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          image={selectedCard.image}
+          title={selectedCard.title}
+          author={selectedCard.author}
+          description={selectedCard.description}
+          location={selectedCard.location}
+          likes={selectedCard.likes}
+          requirements={selectedCard.requirements}
+        />
+      )}
     </div>
   );
 };
