@@ -18,6 +18,7 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
   const [loading, setLoading] = useState(false);
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const handleSearchSubmit = async (searchTerm: string) => {
     setLoading(true);
@@ -26,6 +27,7 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
     setCards(data);
     setSearch(searchTerm);
     setLoading(false);
+    setInitialLoading(false);
   };
 
   useEffect(() => {
@@ -35,6 +37,7 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
     }
     const defaultCards = searchForm ? filteredData(data, searchForm) : data;
     setCards(defaultCards);
+    setInitialLoading(false);
   }, []);
 
   useEffect(() => {
@@ -62,7 +65,9 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
       <div className="container">
         <div className="home__wrapper">
           <div className="home__card">
-            {loading ? (
+            {initialLoading ? (
+              <Loader />
+            ) : loading ? (
               <Loader />
             ) : cards.length ? (
               cards.map((card) => (
