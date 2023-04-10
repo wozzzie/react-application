@@ -5,25 +5,14 @@ interface CardProps {
   image: string;
   title: string;
   author: string;
-  // description: string;
   location: string;
   likes: string;
-  // requirements: string;
   onClick: () => void;
 }
 
-const Card: React.FC<CardProps> = ({
-  image,
-  title,
-  author,
-  // description,
-  location,
-  likes,
-  // requirements,
-  onClick,
-}) => {
+const Card: React.FC<CardProps> = ({ image, title, author, location, likes, onClick }) => {
   return (
-    <div className="card" onClick={onClick}>
+    <div className="card" onClick={onClick} data-testid="card">
       <div className="card__image-container">
         <img className="card__image" src={image} alt={title} />
       </div>
@@ -33,9 +22,7 @@ const Card: React.FC<CardProps> = ({
           <p className="card__likes">💚 {likes}</p>
         </div>
         <p className="card__author">Author: {author}</p>
-        {/* <p className="card__description">{description}</p> */}
         <p className="card__location">Location: {location}</p>
-        {/* <p className="card__requirements">Requirements: {requirements}</p> */}
       </div>
     </div>
   );

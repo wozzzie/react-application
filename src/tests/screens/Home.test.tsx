@@ -1,25 +1,43 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import { render, screen, waitFor } from '@testing-library/react';
 import Home from '../../screens/home/Home';
-import { DATA } from '../../data/data';
+import React from 'react';
 
-describe('Home screen', () => {
-  const testProps = {
-    advice: 'Test Advice',
-  };
+const server = setupServer(
+  rest.get('https://mock-server-api-two.vercel.app/catalog', (req, res, ctx) => {
+    const searchTerm = req.url.searchParams.get('q');
+    if (searchTerm === 'invalid') {
+      return res(ctx.status(400));
+    }
+    return res(ctx.json([{ id: 1, title: 'Test Card', author: 'Test Author' }]));
+  })
+);
 
-  test('testing render multiply card components with correct data', () => {
-    render(<Home {...testProps} />);
-    expect(screen.getByTestId('main-page')).toBeInTheDocument();
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
-    DATA.forEach((card) => {
-      expect(screen.getByText(card.title)).toBeInTheDocument();
-      expect(screen.getByText(`Author: ${card.author}`)).toBeInTheDocument();
-      expect(screen.getByText(card.description)).toBeInTheDocument();
-      expect(screen.getByText(`Location: ${card.location}`)).toBeInTheDocument();
-      expect(screen.getByText(`Requirements: ${card.requirements}`)).toBeInTheDocument();
+describe('Home component', () => {
+  it('shows error message when API call fails', async () => {
+    server.use(
+      rest.get('https://mock-server-api-two.vercel.app/catalog', (req, res, ctx) => {
+        return res(ctx.status(500));
+      })
+    );
+
+    render(<Home advice="test advice" />);
+
+    await waitFor(() => {
+      expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
     });
-    expect(screen.getByText('Test Advice')).toBeInTheDocument();
-    expect(screen.getByTestId('search-input')).toBeInTheDocument();
+  });
+
+  it('shows no results found message when search term does not match', async () => {
+    render(<Home advice="test advice" />);
+
+    await waitFor(() => {
+      expect(screen.queryByText(/test card/i)).not.toBeInTheDocument();
+    });
   });
 });

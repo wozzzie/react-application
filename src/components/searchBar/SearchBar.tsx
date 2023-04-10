@@ -31,7 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
 
   return (
     <div className="search-form__wrapper">
-      <form className="search-form" onSubmit={handleSearchSubmit}>
+      <form className="search-form" onSubmit={handleSearchSubmit} data-testid="search-form">
         <input
           data-testid="search-input"
           className="search-form__input"

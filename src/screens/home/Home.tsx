@@ -76,10 +76,8 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
                   image={card.image}
                   title={card.title}
                   author={card.author}
-                  // description={card.description}
                   location={card.location}
                   likes={card.likes}
-                  // requirements={card.requirements}
                   onClick={() => handleCardClick(card)}
                 />
               ))

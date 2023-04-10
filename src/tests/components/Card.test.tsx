@@ -13,6 +13,7 @@ describe('Card component', () => {
     location: 'Test Location',
     likes: 'Test Likes',
     requirements: 'Test Requirements',
+    onClick: () => console.log('Card clicked'),
   };
 
   test('testing single card component', () => {
@@ -22,8 +23,6 @@ describe('Card component', () => {
     expect(screen.getByText('Test Title')).toBeInTheDocument();
     expect(screen.getByText('💚 Test Likes')).toBeInTheDocument();
     expect(screen.getByText('Author: Test Author')).toBeInTheDocument();
-    expect(screen.getByText('Test Description')).toBeInTheDocument();
     expect(screen.getByText('Location: Test Location')).toBeInTheDocument();
-    expect(screen.getByText('Requirements: Test Requirements')).toBeInTheDocument();
   });
 });

@@ -32,10 +32,14 @@ const CardModal: React.FC<CardModalProps> = ({ isOpen, onClose, id }) => {
   };
 
   return (
-    <div className={`card-modal ${isOpen ? 'open' : ''}`} onClick={handleClickOverlay}>
+    <div
+      className={`card-modal ${isOpen ? 'open' : ''}`}
+      onClick={handleClickOverlay}
+      data-testid="card-modal"
+    >
       <div className="card-modal__container">
         {loading || !cardData ? (
-          <Loader />
+          <Loader data-testid="loader" />
         ) : (
           <>
             <button className="card-modal__close-button" onClick={onClose}>
