@@ -98,13 +98,7 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
           card={selectedCard}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          image={selectedCard.image}
-          title={selectedCard.title}
-          author={selectedCard.author}
-          description={selectedCard.description}
-          location={selectedCard.location}
-          likes={selectedCard.likes}
-          requirements={selectedCard.requirements}
+          id={selectedCard.id}
         />
       )}
     </div>
