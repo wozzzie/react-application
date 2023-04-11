@@ -1,4 +1,6 @@
-export const DATA = [
+import { CardType } from '../types/form';
+
+export const data: CardType[] = [
   {
     id: '8Rp2S7QXjkTy',
     image: 'https://i.postimg.cc/Kz8VQ2XX/eb164ff2-0966-5601-beaf-2d54971223e3.jpg',
@@ -21,7 +23,7 @@ export const DATA = [
     location: 'Australia',
     likes: '4454',
     requirements:
-      "The key to a healthy bird's nest fern is providing it with ample warmth, humidity, and moisture.",
+      "The key to a healthy Bird's nest fern is providing it with ample warmth, humidity, and moisture.",
   },
   {
     id: '1Kv0A3YDwgUi',
@@ -40,7 +42,7 @@ export const DATA = [
     id: '7Fp5R2JNxOqV',
     image: 'https://i.postimg.cc/mgT0hMd2/57b5b271-43ab-595b-97de-8f89f97195a0.jpg',
     title: 'ZZ Plant',
-    author: 'Theodore "T-Bag" Bagwell',
+    author: "Theodore 'T-Bag' Bagwell",
     description:
       "ZZ plant, also known as Zamioculcas zamiifolia, is a popular houseplant with glossy, dark green leaves that resemble feathers. Native to Africa, it's a hardy and low maintenance plant that can tolerate neglect and low light conditions.",
     location: 'Mid Africa',

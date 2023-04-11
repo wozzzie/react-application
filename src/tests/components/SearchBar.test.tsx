@@ -4,7 +4,7 @@ import SearchBar from '../../components/searchBar/SearchBar';
 
 describe('Search Bar component', () => {
   test('testing render of the search input', () => {
-    render(<SearchBar />);
+    render(<SearchBar onSubmit={() => {}} />);
 
     const searchInput = screen.getByTestId('search-input');
     expect(searchInput).toBeInTheDocument();
@@ -12,7 +12,7 @@ describe('Search Bar component', () => {
   });
 
   test('testing update of the search input value', () => {
-    render(<SearchBar />);
+    render(<SearchBar onSubmit={() => {}} />);
 
     const searchInput = screen.getByTestId('search-input');
 
@@ -21,7 +21,7 @@ describe('Search Bar component', () => {
   });
 
   test('testing save search input value to local storage', () => {
-    render(<SearchBar />);
+    render(<SearchBar onSubmit={() => {}} />);
 
     const searchInput = screen.getByTestId('search-input');
 
@@ -30,7 +30,7 @@ describe('Search Bar component', () => {
   });
 
   test('testing update local storage on component unmount', () => {
-    const { unmount } = render(<SearchBar />);
+    const { unmount } = render(<SearchBar onSubmit={() => {}} />);
     const searchInput = screen.getByTestId('search-input');
 
     fireEvent.change(searchInput, { target: { value: 'plant' } });
@@ -43,7 +43,7 @@ describe('Search Bar component', () => {
   test('testing load value from local storage', () => {
     localStorage.setItem('searchForm', 'plant');
 
-    render(<SearchBar />);
+    render(<SearchBar onSubmit={() => {}} />);
 
     const searchInput = screen.getByTestId('search-input');
     expect(searchInput).toHaveValue('plant');

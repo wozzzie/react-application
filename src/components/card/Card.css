@@ -1,31 +1,35 @@
 .card__image {
   min-width: 288px;
-  border-radius: 10px;
   transition: 0.5s;
   height: 288px;
-  cursor: pointer;
 }
 
-.card__descr {
+.card__content {
   font-size: 16px;
-  padding: 0 0 10px 5px;
+  padding: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
 .card {
-  max-width: 288px;
-  border: 1px solid white;
-  border-radius: 12px;
+  max-width: 290px;
+  cursor: pointer;
+  background-color: #057a698c;
 }
 
 .card__title {
   font-weight: bold;
 }
 
-.card__header {
-  padding: 5px;
+.card__titleBlock {
   display: flex;
   justify-content: space-between;
+}
+
+.card__author,
+.card__location {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

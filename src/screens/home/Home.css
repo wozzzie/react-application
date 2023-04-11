@@ -1,8 +1,8 @@
 .home__card {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 20px;
+  align-items: start;
   max-width: 60%;
   width: 100%;
 }
@@ -26,7 +26,11 @@
 }
 
 .home__text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home__no-results {
+  font-size: 38px;
 }

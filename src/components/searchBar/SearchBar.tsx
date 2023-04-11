@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './SearchBar.css';
 
-const SearchBar = () => {
-  const [search, setSearch] = useState(localStorage.getItem('searchForm') ?? '');
+interface SearchBarProps {
+  onSubmit: (searchTerm: string) => void;
+}
 
-  const inputRef = useRef(search);
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
+  const [search, setSearch] = useState<string>(localStorage.getItem('searchForm') ?? '');
+
+  const inputRef = useRef<string>(search);
 
   useEffect(() => {
     inputRef.current = search;
@@ -20,9 +24,14 @@ const SearchBar = () => {
     setSearch(event.target.value);
   };
 
+  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onSubmit(search);
+  };
+
   return (
     <div className="search-form__wrapper">
-      <form className="search-form">
+      <form className="search-form" onSubmit={handleSearchSubmit} data-testid="search-form">
         <input
           data-testid="search-input"
           className="search-form__input"
