@@ -14,12 +14,7 @@ const FormCard: React.FC<CardProps> = ({
 }) => {
   return (
     <div className="card_new">
-      {file && file instanceof Blob && (
-        <div>
-          <img className="card_new__img" src={URL.createObjectURL(file)} alt="File preview" />
-        </div>
-      )}
-
+      <img className="card_new__img" src={file} alt="File preview" />
       <p className="card_new__text">
         {title} {authorName}
       </p>

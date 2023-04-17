@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { addCard } from '../../store/reducers/formSlice';
 import {
   FormCard,
   CheckboxInput,
@@ -12,14 +14,15 @@ import {
   RadioInput,
 } from './index';
 import Popup from './popup';
-import { Card } from '../../types/form';
+import { Card, CardProps } from '../../types/form';
 import { FormValues } from '../../types/form';
 
 import './Form.css';
 
 const Form = () => {
-  const [cards, setCards] = useState<Card[]>([]);
+  const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState<boolean>(false);
+  const cards = useSelector((state: RootState) => state.form.cards);
 
   const {
     register,
@@ -36,10 +39,10 @@ const Form = () => {
       location: data.location,
       title: data.title,
       isChecked: data.isChecked,
-      file: data.file[0],
+      file: URL.createObjectURL(data.file[0]),
     };
 
-    setCards([...cards, newCard]);
+    dispatch(addCard(newCard));
     setShowPopup(true);
     reset();
   };
@@ -116,9 +119,11 @@ const Form = () => {
         />
       )}
       <div className="cards__container">
-        {cards.map((card, index) => (
-          <FormCard key={index} {...card} />
-        ))}
+        {cards.map(
+          (card: JSX.IntrinsicAttributes & CardProps, index: React.Key | null | undefined) => (
+            <FormCard key={index} {...card} />
+          )
+        )}
       </div>
     </>
   );

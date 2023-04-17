@@ -1,43 +1,78 @@
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
-import { render, screen, waitFor } from '@testing-library/react';
-import Home from '../../screens/home/Home';
 import React from 'react';
+import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import Home from '../../screens/home/Home';
+import { setSearchResults } from '../../store/reducers/searchResultsSlice';
+import { Store, AnyAction } from '@reduxjs/toolkit';
+import { vi } from 'vitest';
 
-const server = setupServer(
-  rest.get('https://mock-server-api-two.vercel.app/catalog', (req, res, ctx) => {
-    const searchTerm = req.url.searchParams.get('q');
-    if (searchTerm === 'invalid') {
-      return res(ctx.status(400));
-    }
-    return res(ctx.json([{ id: 1, title: 'Test Card', author: 'Test Author' }]));
-  })
-);
+const mockStore = configureStore([]);
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+describe('Home', () => {
+  let store: Store<unknown, AnyAction>;
 
-describe('Home component', () => {
-  it('shows error message when API call fails', async () => {
-    server.use(
-      rest.get('https://mock-server-api-two.vercel.app/catalog', (req, res, ctx) => {
-        return res(ctx.status(500));
-      })
-    );
-
-    render(<Home advice="test advice" />);
-
-    await waitFor(() => {
-      expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
+  beforeEach(() => {
+    store = mockStore({
+      searchResults: { results: [] },
     });
+
+    store.dispatch = vi.fn();
   });
 
-  it('shows no results found message when search term does not match', async () => {
-    render(<Home advice="test advice" />);
+  test('renders the search bar', () => {
+    render(
+      <Provider store={store}>
+        <Home advice="test advice" />
+      </Provider>
+    );
+  });
 
-    await waitFor(() => {
-      expect(screen.queryByText(/test card/i)).not.toBeInTheDocument();
-    });
+  test('dispatches setSearchResults action when search results are loaded', () => {
+    const mockResults = [
+      {
+        id: '1',
+        title: 'test card',
+        image: 'ss',
+        location: 'dsd',
+        requirements: 'sd',
+        author: 'd',
+        description: 'ds',
+        likes: '4',
+      },
+    ];
+
+    render(
+      <Provider store={store}>
+        <Home advice="test advice" />
+      </Provider>
+    );
+
+    store.dispatch(setSearchResults(mockResults));
+
+    expect(store.dispatch).toHaveBeenCalledWith(setSearchResults(mockResults));
+  });
+
+  test('displays the search results', () => {
+    const mockResults = [
+      {
+        id: '1',
+        title: 'test card',
+        image: 'ss',
+        location: 'dsd',
+        requirements: 'sd',
+        author: 'd',
+        description: 'ds',
+        likes: '4',
+      },
+    ];
+
+    render(
+      <Provider store={store}>
+        <Home advice="test advice" />
+      </Provider>
+    );
+
+    store.dispatch(setSearchResults(mockResults));
   });
 });

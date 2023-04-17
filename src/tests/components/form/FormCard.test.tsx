@@ -12,7 +12,7 @@ describe('FormCard', () => {
     location: 'New York',
     title: 'Test title',
     isChecked: true,
-    file: new File([''], 'test.jpg', { type: 'image/jpeg' }),
+    file: 'string',
   };
 
   it('should render the component correctly', () => {
@@ -27,10 +27,5 @@ describe('FormCard', () => {
     ).toBeInTheDocument();
     expect(getByText('Thank you for choosing us!')).toBeInTheDocument();
     expect(getByAltText('File preview')).toBeInTheDocument();
-  });
-
-  it('should not render the file preview if file prop is not provided', () => {
-    const { queryByAltText } = render(<FormCard {...props} file={null} />);
-    expect(queryByAltText('File preview')).not.toBeInTheDocument();
   });
 });

@@ -5,7 +5,7 @@ interface Card {
   location: string;
   title: string;
   isChecked: boolean;
-  file: File | null;
+  file: string;
 }
 
 interface FormState {
@@ -29,7 +29,7 @@ interface CardProps {
   location: string;
   title: string;
   isChecked: boolean;
-  file: File | null;
+  file: string;
 }
 
 interface FormValues {
