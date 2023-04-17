@@ -1,53 +1,44 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { CardType } from '../../types/form';
 import Card from '../../components/card/Card';
 import SearchBar from '../../components/searchBar/SearchBar';
 import './Home.css';
-import { data } from '../../data/data';
-import filteredData from '../../components/filteredData/filteredData';
+import { useGetCardsQuery } from '../../store/api/api';
 import Loader from '../../components/loader/loader';
 import CardModal from '../../components/cardModal/cardModal';
+import { setSearchResults } from '../../store/reducers/searchResultsSlice';
+import { RootState } from '../../store/store';
 
 interface HomeProps {
   advice: string;
 }
 
 const Home: React.FC<HomeProps> = ({ advice }) => {
-  const [cards, setCards] = useState<CardType[]>([]);
+  const dispatch = useDispatch();
+  const searchResults = useSelector((state: RootState) => state.searchResults.results);
+
   const [search, setSearch] = useState('');
-  const [loading, setLoading] = useState(false);
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [initialLoading, setInitialLoading] = useState(true);
-
-  const handleSearchSubmit = async (searchTerm: string) => {
-    setLoading(true);
-    const response = await fetch(`https://mock-server-api-two.vercel.app/catalog?q=${searchTerm}`);
-    const data = await response.json();
-    setCards(data);
-    setSearch(searchTerm);
-    setLoading(false);
-    setInitialLoading(false);
-  };
+  const { data, isLoading } = useGetCardsQuery(search);
 
   useEffect(() => {
-    const searchForm = localStorage.getItem('searchForm');
-    if (searchForm) {
-      setSearch(searchForm);
+    if (data) {
+      dispatch(setSearchResults(data));
     }
-    const defaultCards = searchForm ? filteredData(data, searchForm) : data;
-    setCards(defaultCards);
-    setInitialLoading(false);
-  }, []);
+  }, [data, dispatch]);
 
   useEffect(() => {
-    localStorage.setItem('searchForm', search);
-  }, [search]);
+    dispatch(setSearchResults(searchResults));
+  }, [dispatch, searchResults]);
 
-  useEffect(() => {
-    const filteredCards = filteredData(data, search);
-    setCards(filteredCards);
-  }, [search]);
+  const handleSearchSubmit = (searchTerm: string) => {
+    setSearch(searchTerm);
+    if (searchTerm === '') {
+      dispatch(setSearchResults(data!));
+    }
+  };
 
   const handleCardClick = (card: CardType) => {
     setSelectedCard(card);
@@ -65,12 +56,10 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
       <div className="container">
         <div className="home__wrapper">
           <div className="home__card">
-            {initialLoading ? (
+            {isLoading ? (
               <Loader />
-            ) : loading ? (
-              <Loader />
-            ) : cards.length ? (
-              cards.map((card) => (
+            ) : searchResults.length ? (
+              searchResults.map((card) => (
                 <Card
                   key={card.id}
                   image={card.image}
@@ -92,12 +81,7 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
         </div>
       </div>
       {selectedCard && (
-        <CardModal
-          card={selectedCard}
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          id={selectedCard.id}
-        />
+        <CardModal isOpen={isModalOpen} onClose={handleCloseModal} id={selectedCard.id} />
       )}
     </div>
   );
