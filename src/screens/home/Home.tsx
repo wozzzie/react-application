@@ -21,7 +21,7 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
   const [search, setSearch] = useState('');
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data, isLoading } = useGetCardsQuery(search);
+  const { data, isLoading, isFetching } = useGetCardsQuery(search);
 
   useEffect(() => {
     if (data) {
@@ -56,7 +56,7 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
       <div className="container">
         <div className="home__wrapper">
           <div className="home__card">
-            {isLoading ? (
+            {isLoading || isFetching ? (
               <Loader />
             ) : searchResults.length ? (
               searchResults.map((card) => (
