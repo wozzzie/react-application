@@ -1,29 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { CardType } from '../../types/form';
+import React from 'react';
+import { useGetCardsQuery } from '../../store/api/api';
 import './cardModal.css';
 import Loader from '../loader/loader';
 
 interface CardModalProps {
   isOpen: boolean;
   onClose: () => void;
-  card: CardType;
   id: string;
 }
 
 const CardModal: React.FC<CardModalProps> = ({ isOpen, onClose, id }) => {
-  const [loading, setLoading] = useState(false);
-  const [cardData, setCardData] = useState<CardType | null>(null);
+  const { data: cardData, isLoading } = useGetCardsQuery(id);
 
-  useEffect(() => {
-    const fetchCardData = async () => {
-      setLoading(true);
-      const response = await fetch(`https://mock-server-api-two.vercel.app/catalog/${id}`);
-      const data = await response.json();
-      setCardData(data);
-      setLoading(false);
-    };
-    fetchCardData();
-  }, [id]);
+  const card = cardData?.find((card: { id: string }) => card.id === id);
 
   const handleClickOverlay = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (event.target === event.currentTarget) {
@@ -38,7 +27,7 @@ const CardModal: React.FC<CardModalProps> = ({ isOpen, onClose, id }) => {
       data-testid="card-modal"
     >
       <div className="card-modal__container">
-        {loading || !cardData ? (
+        {isLoading || !card ? (
           <Loader data-testid="loader" />
         ) : (
           <>
@@ -47,21 +36,21 @@ const CardModal: React.FC<CardModalProps> = ({ isOpen, onClose, id }) => {
             </button>
             <div className="card-modal__content">
               <div className="card-modal__imageBlock">
-                <img className="card__image" src={cardData.image} alt={cardData.title} />
+                <img className="card__image" src={card.image} alt={card.title} />
                 <div className="card-modal__info">
                   <div className="card-modal__titleBlock">
-                    <h2 className="card-modal__title">{cardData.title}</h2>
-                    <p className="card-modal__likes">{`💚 ${cardData.likes}`}</p>
+                    <h2 className="card-modal__title">{card.title}</h2>
+                    <p className="card-modal__likes">{`💚 ${card.likes}`}</p>
                   </div>
 
-                  <p className="card-modal__location">{`Location: ${cardData.location}`}</p>
-                  <p className="card-modal__description">{cardData.description}</p>
+                  <p className="card-modal__location">{`Location: ${card.location}`}</p>
+                  <p className="card-modal__description">{card.description}</p>
                 </div>
               </div>
 
               <div className="card-modal__requirementsBlock">
-                <div className="card-modal__author">{`Author: ${cardData.author}`}</div>
-                <div className="card-modal__requirements">{`Requirements: ${cardData.requirements}`}</div>
+                <div className="card-modal__author">{`Author: ${card.author}`}</div>
+                <div className="card-modal__requirements">{`Requirements: ${card.requirements}`}</div>
               </div>
             </div>
           </>
