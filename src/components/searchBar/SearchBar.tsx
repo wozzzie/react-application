@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchText } from '../../store/reducers/searchBarSlice';
+import { RootState } from '../../store/store';
+
 import './SearchBar.css';
 
 interface SearchBarProps {
@@ -6,27 +10,17 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
-  const [search, setSearch] = useState<string>(localStorage.getItem('searchForm') ?? '');
-
-  const inputRef = useRef<string>(search);
-
-  useEffect(() => {
-    inputRef.current = search;
-  }, [search]);
-
-  useEffect(() => {
-    return () => {
-      localStorage.setItem('searchForm', inputRef.current);
-    };
-  }, []);
+  const dispatch = useDispatch();
+  const searchText = useSelector((state: RootState) => state.searchBar.searchText);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
+    const searchTerm = event.target.value;
+    dispatch(setSearchText(searchTerm));
   };
 
   const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit(search);
+    onSubmit(searchText);
   };
 
   return (
@@ -36,7 +30,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
           data-testid="search-input"
           className="search-form__input"
           type="search"
-          value={search}
+          value={searchText}
           onChange={handleSearchChange}
           placeholder="Search for a plant..."
         />
