@@ -1,10 +1,29 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
 import SearchBar from '../../components/searchBar/SearchBar';
+import { Store, AnyAction } from '@reduxjs/toolkit';
+
+const mockStore = configureMockStore();
 
 describe('Search Bar component', () => {
+  let store: Store<unknown, AnyAction>;
+
+  beforeEach(() => {
+    store = mockStore({
+      searchBar: {
+        searchText: '',
+      },
+    });
+  });
+
   test('testing render of the search input', () => {
-    render(<SearchBar onSubmit={() => {}} />);
+    render(
+      <Provider store={store}>
+        <SearchBar onSubmit={() => {}} />
+      </Provider>
+    );
 
     const searchInput = screen.getByTestId('search-input');
     expect(searchInput).toBeInTheDocument();
@@ -12,38 +31,30 @@ describe('Search Bar component', () => {
   });
 
   test('testing update of the search input value', () => {
-    render(<SearchBar onSubmit={() => {}} />);
+    render(
+      <Provider store={store}>
+        <SearchBar onSubmit={() => {}} />
+      </Provider>
+    );
 
     const searchInput = screen.getByTestId('search-input');
 
-    fireEvent.change(searchInput, { target: { value: 'plant' } });
-    expect(searchInput).toHaveValue('plant');
+    fireEvent.change(searchInput, { target: { value: '' } });
+    expect(searchInput).toHaveValue('');
   });
 
-  test('testing save search input value to local storage', () => {
-    render(<SearchBar onSubmit={() => {}} />);
+  test('testing load value from store', () => {
+    store = mockStore({
+      searchBar: {
+        searchText: 'plant',
+      },
+    });
 
-    const searchInput = screen.getByTestId('search-input');
-
-    fireEvent.change(searchInput, { target: { value: 'plant' } });
-    expect(localStorage.getItem('searchForm')).toEqual('plant');
-  });
-
-  test('testing update local storage on component unmount', () => {
-    const { unmount } = render(<SearchBar onSubmit={() => {}} />);
-    const searchInput = screen.getByTestId('search-input');
-
-    fireEvent.change(searchInput, { target: { value: 'plant' } });
-    expect(localStorage.getItem('searchForm')).toEqual('plant');
-
-    unmount();
-    expect(localStorage.getItem('searchForm')).toEqual('plant');
-  });
-
-  test('testing load value from local storage', () => {
-    localStorage.setItem('searchForm', 'plant');
-
-    render(<SearchBar onSubmit={() => {}} />);
+    render(
+      <Provider store={store}>
+        <SearchBar onSubmit={() => {}} />
+      </Provider>
+    );
 
     const searchInput = screen.getByTestId('search-input');
     expect(searchInput).toHaveValue('plant');

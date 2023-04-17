@@ -3,13 +3,17 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import RoutesComponent from '../../components/routes/RoutesComponent';
+import { Provider } from 'react-redux';
+import store from '../../store/store';
 
 describe('Routes Component', () => {
   it('testing render of the main page', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <RoutesComponent />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <RoutesComponent />
+        </MemoryRouter>
+      </Provider>
     );
 
     const mainPage = screen.getByTestId('main-page');

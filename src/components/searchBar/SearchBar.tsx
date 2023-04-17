@@ -11,7 +11,7 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
   const dispatch = useDispatch();
-  const searchText = useSelector((state: RootState) => state.searchBar.searchText);
+  const searchText = useSelector((state: RootState) => state.searchBar?.searchText);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value;
