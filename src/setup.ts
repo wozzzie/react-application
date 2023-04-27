@@ -1,4 +1,18 @@
-import matchers from '@testing-library/jest-dom/matchers';
-import { expect } from 'vitest';
+import { setupStore } from './store/store';
+import { server } from './mocks/server/server';
+import { cardsApi } from './store/api/api';
+import { beforeAll, afterEach, afterAll } from 'vitest';
 
-expect.extend(matchers);
+const store = setupStore({});
+
+beforeAll(() => {
+  server.listen();
+});
+
+afterEach(() => {
+  server.resetHandlers();
+
+  store.dispatch(cardsApi.util.resetApiState());
+});
+
+afterAll(() => server.close());
