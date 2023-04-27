@@ -10,15 +10,16 @@ const initialState: FormState = {
 };
 
 export const formSlice = createSlice({
-  name: 'form',
+  name: 'cards',
   initialState,
   reducers: {
     addCard: (state, action: PayloadAction<Card>) => {
-      state.cards.push(action.payload);
+      state.cards = [action.payload, ...state.cards];
     },
   },
 });
 
-export const { addCard } = formSlice.actions;
+const { actions, reducer } = formSlice;
+export default reducer;
 
-export default formSlice.reducer;
+export const { addCard } = actions;

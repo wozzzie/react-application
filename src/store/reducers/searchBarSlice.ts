@@ -18,5 +18,6 @@ export const searchBarSlice = createSlice({
   },
 });
 
-export const { setSearchText } = searchBarSlice.actions;
-export default searchBarSlice.reducer;
+const { actions, reducer } = searchBarSlice;
+export default reducer;
+export const { setSearchText } = actions;
