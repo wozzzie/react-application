@@ -5,11 +5,7 @@ import { RootState } from '../../store/store';
 
 import './SearchBar.css';
 
-interface SearchBarProps {
-  onSubmit: (searchTerm: string) => void;
-}
-
-const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
+const SearchBar = () => {
   const dispatch = useDispatch();
   const searchText = useSelector((state: RootState) => state.searchBar?.searchText);
 
@@ -20,7 +16,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
 
   const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit(searchText);
+    dispatch(setSearchText(searchText));
   };
 
   return (

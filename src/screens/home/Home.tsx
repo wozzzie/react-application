@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useGetCardsQuery } from '../../store/api/api';
+import { RootState } from '../../store/store';
+
 import { CardType } from '../../types/form';
 import Card from '../../components/card/Card';
 import SearchBar from '../../components/searchBar/SearchBar';
 import './Home.css';
-import { useGetCardsQuery } from '../../store/api/api';
 import Loader from '../../components/loader/loader';
 import CardModal from '../../components/cardModal/cardModal';
 import { setSearchResults } from '../../store/reducers/searchResultsSlice';
-import { RootState } from '../../store/store';
 
 interface HomeProps {
   advice: string;
@@ -16,29 +18,24 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ advice }) => {
   const dispatch = useDispatch();
-  const searchResults = useSelector((state: RootState) => state.searchResults.results);
-
-  const [search, setSearch] = useState('');
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const searchText = useSelector((state: RootState) => state.searchBar.searchText);
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data, isLoading, isFetching } = useGetCardsQuery(search);
+  const { data: cards = [], isLoading, isFetching } = useGetCardsQuery(searchText);
 
   useEffect(() => {
-    if (data) {
-      dispatch(setSearchResults(data));
+    if (isInitialLoad) {
+      dispatch(setSearchResults(cards));
+      setIsInitialLoad(false);
     }
-  }, [data, dispatch]);
+  }, [dispatch, cards, isInitialLoad]);
 
   useEffect(() => {
-    dispatch(setSearchResults(searchResults));
-  }, [dispatch, searchResults]);
-
-  const handleSearchSubmit = (searchTerm: string) => {
-    setSearch(searchTerm);
-    if (searchTerm === '') {
-      dispatch(setSearchResults(data!));
+    if (!isInitialLoad) {
+      dispatch(setSearchResults(cards));
     }
-  };
+  }, [dispatch, cards, searchText, isInitialLoad]);
 
   const handleCardClick = (card: CardType) => {
     setSelectedCard(card);
@@ -52,14 +49,14 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
 
   return (
     <div data-testid="main-page">
-      <SearchBar onSubmit={handleSearchSubmit} />
+      <SearchBar />
       <div className="container">
         <div className="home__wrapper">
           <div className="home__card">
             {isLoading || isFetching ? (
               <Loader />
-            ) : searchResults.length ? (
-              searchResults.map((card) => (
+            ) : cards.length ? (
+              cards.map((card) => (
                 <Card
                   key={card.id}
                   image={card.image}
