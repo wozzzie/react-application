@@ -1,21 +1,32 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "Node",
+    "noImplicitAny": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "baseUrl": "./src",
     "jsx": "react"
   },
-  "include": ["vite.config.ts", ".eslintrc.json", "src", "src/components/searchBar/SearchBar.tsx"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "vite.config.ts",
+    ".eslintrc.json",
+    "src",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.mjs"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "typeRoots": ["./src/types"],
+  "ts-node": {
+    "esm": true
+  }
 }
