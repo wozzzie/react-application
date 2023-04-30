@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useGetCardsQuery } from '../../store/api/api';
 import { RootState } from '../../store/store';
-
 import { CardType } from '../../types/form';
 import Card from '../../components/card/Card';
 import SearchBar from '../../components/searchBar/SearchBar';
-import './Home.css';
 import Loader from '../../components/loader/loader';
 import CardModal from '../../components/cardModal/cardModal';
 import { setSearchResults } from '../../store/reducers/searchResultsSlice';
+
+import './Home.css';
 
 interface HomeProps {
   advice: string;

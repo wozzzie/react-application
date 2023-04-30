@@ -33,6 +33,8 @@ export default defineConfig({
         'src/entry-client.tsx',
         'src/entry-server.tsx',
         '**/I*.ts',
+        'cypress/**/*.*',
+        '**/*.cy.ts',
       ],
     },
   },

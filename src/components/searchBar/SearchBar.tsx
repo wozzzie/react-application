@@ -1,22 +1,19 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { setSearchText } from '../../store/reducers/searchBarSlice';
-import { RootState } from '../../store/store';
 
 import './SearchBar.css';
+import { RootState } from '../../store/store';
 
 const SearchBar = () => {
   const dispatch = useDispatch();
   const searchText = useSelector((state: RootState) => state.searchBar?.searchText);
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = event.target.value;
-    dispatch(setSearchText(searchTerm));
-  };
+  const searchRef = useRef<HTMLInputElement>(null);
 
   const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(setSearchText(searchText));
+    searchRef.current && dispatch(setSearchText(searchRef.current.value));
   };
 
   return (
@@ -26,8 +23,8 @@ const SearchBar = () => {
           data-testid="search-input"
           className="search-form__input"
           type="search"
-          value={searchText}
-          onChange={handleSearchChange}
+          defaultValue={searchText}
+          ref={searchRef}
           placeholder="Search for a plant..."
         />
         <img src="/img/search.png" alt="loop" className="search-form__loop" />
