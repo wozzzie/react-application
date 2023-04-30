@@ -6,12 +6,14 @@
   "type": "module",
   "scripts": {
     "dev:ssr": "nodemon server",
+    "start:node": "ts-node server.tsx",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
     "coverage:unit": "vitest --coverage",
     "lint": "eslint . --ext .ts,.tsx",
-    "cypress:open": "cypress open"
+    "cypress": "cypress run --e2e",
+    "test:e2e": "start-server-and-test start:node http://localhost:5173 cypress && npx nyc report --reporter=text-summary"
   },
   "repository": {
     "type": "git",
@@ -35,12 +37,15 @@
   "devDependencies": {
     "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
+    "@cypress/code-coverage": "^3.10.4",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/cypress__code-coverage": "^3.10.0",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.0",
+    "@types/node": "^18.16.2",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/redux-mock-store": "^1.0.3",
@@ -51,10 +56,13 @@
     "@vitest/coverage-c8": "^0.29.3",
     "babel-jest": "^29.5.0",
     "cypress": "^12.11.0",
+    "cypress-vite": "^1.4.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-cypress": "^2.13.2",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest-dom": "^4.0.3",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -69,10 +77,12 @@
     "prettier": "^2.8.4",
     "redux-mock-store": "^1.5.4",
     "serialize-javascript": "^6.0.1",
+    "start-server-and-test": "^2.0.0",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2",
     "vite": "^4.2.0",
+    "vite-plugin-istanbul": "^4.0.1",
     "vitest": "^0.29.3"
   }
 }

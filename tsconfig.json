@@ -15,18 +15,12 @@
     "baseUrl": "./src",
     "jsx": "react"
   },
-  "include": [
-    "vite.config.ts",
-    ".eslintrc.json",
-    "src",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.cjs",
-    "**/*.mjs"
-  ],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "include": ["vite.config.ts", ".eslintrc.json", "src"],
+  "exclude": ["cypress"],
   "typeRoots": ["./src/types"],
   "ts-node": {
-    "esm": true
+    "esm": true,
+    "transpileOnly": true,
+    "experimentalSpecifierResolution": "node"
   }
 }
