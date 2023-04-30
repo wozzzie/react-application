@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Error component', () => {
   it('displays the error message', () => {
     const errorMessage = 'Oops! Something went wrong. Please try again later.';

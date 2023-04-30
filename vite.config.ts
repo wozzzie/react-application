@@ -32,6 +32,7 @@ export default defineConfig({
         'server.tsx',
         'src/entry-client.tsx',
         'src/entry-server.tsx',
+        '**/I*.ts',
       ],
     },
   },

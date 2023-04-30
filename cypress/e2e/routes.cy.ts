@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('RoutesComponent', () => {
   beforeEach(() => {
     cy.visit('/');

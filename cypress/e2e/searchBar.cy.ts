@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('SearchBar Component', () => {
   beforeEach(() => {
     cy.visit('/');

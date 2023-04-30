@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('About component', () => {
   const title = 'Welcome to our Plants Store About Page!';
   const message =

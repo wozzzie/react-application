@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Header component', () => {
   beforeEach(() => {
     cy.visit('/');

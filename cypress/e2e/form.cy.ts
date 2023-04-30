@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Form component', () => {
   it('should submit a new card when the form is filled out and submitted', () => {
     const card = {
