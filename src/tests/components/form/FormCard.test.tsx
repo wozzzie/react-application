@@ -1,8 +1,10 @@
 import React from 'react';
-
-import { render } from '@testing-library/react';
-import { FormCard } from '../../../components/form';
+import { act } from '@testing-library/react';
 import { vi } from 'vitest';
+import '@testing-library/jest-dom';
+
+import { FormCard } from '../../../components/form';
+import renderWithProviders from '../../../tools/tests/test-utilits';
 
 describe('FormCard', () => {
   const props = {
@@ -15,9 +17,13 @@ describe('FormCard', () => {
     file: 'string',
   };
 
-  it('should render the component correctly', () => {
+  it('should render the component correctly', async () => {
     window.URL.createObjectURL = vi.fn();
-    const { getByText, getByAltText } = render(<FormCard {...props} />);
+
+    const { getByText, getByAltText } = await act(async () =>
+      renderWithProviders(<FormCard {...props} />)
+    );
+
     expect(getByText(`${props.title} ${props.authorName}`)).toBeInTheDocument();
     expect(getByText(`Your requirements: ${props.requirements}`)).toBeInTheDocument();
     expect(getByText(`Shipping date: ${props.date}`)).toBeInTheDocument();

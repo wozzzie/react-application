@@ -1,8 +1,10 @@
 import React from 'react';
 import { vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 
 import Popup from '../../../components/form/popup';
+import renderWithProviders from '../../../tools/tests/test-utilits';
 
 describe('Popup', () => {
   const handleClosePopup = vi.fn();
@@ -13,7 +15,9 @@ describe('Popup', () => {
   });
 
   it('renders correctly', () => {
-    render(<Popup message={message} handleClosePopup={handleClosePopup} showPopup={true} />);
+    renderWithProviders(
+      <Popup message={message} handleClosePopup={handleClosePopup} showPopup={true} />
+    );
 
     expect(screen.queryByText('Hooray!')).toBeInTheDocument();
     expect(screen.queryByText(message)).toBeInTheDocument();
@@ -21,7 +25,9 @@ describe('Popup', () => {
   });
 
   it('calls handleClosePopup when OK button is clicked', () => {
-    render(<Popup message={message} handleClosePopup={handleClosePopup} showPopup={true} />);
+    renderWithProviders(
+      <Popup message={message} handleClosePopup={handleClosePopup} showPopup={true} />
+    );
 
     fireEvent.click(screen.getByText('OK'));
 
@@ -30,7 +36,10 @@ describe('Popup', () => {
   });
 
   it('does not render when showPopup is false', () => {
-    render(<Popup message={message} handleClosePopup={handleClosePopup} showPopup={false} />);
+    renderWithProviders(
+      <Popup message={message} handleClosePopup={handleClosePopup} showPopup={true} />
+    );
+
     expect(screen.getByTestId('popup-container')).toHaveClass('popup');
   });
 });

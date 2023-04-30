@@ -31,7 +31,11 @@ const CardModal: React.FC<CardModalProps> = ({ isOpen, onClose, id }) => {
           <Loader data-testid="loader" />
         ) : (
           <>
-            <button className="card-modal__close-button" onClick={onClose}>
+            <button
+              className="card-modal__close-button"
+              onClick={onClose}
+              data-testid="card-modal-close-button"
+            >
               &times;
             </button>
             <div className="card-modal__content">

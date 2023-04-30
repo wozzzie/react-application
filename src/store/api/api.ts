@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CardType } from '../../types/form';
 
 export const cardsApi = createApi({
-  reducerPath: 'cards',
+  reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://mock-server-api-two.vercel.app' }),
   endpoints: (builder) => ({
     getCards: builder.query<CardType[], string>({

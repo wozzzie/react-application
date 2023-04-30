@@ -1,6 +1,9 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+
 import Card from '../../components/card/Card';
+import renderWithProviders from '../../tools/tests/test-utilits';
 
 describe('Card component', () => {
   const props = {
@@ -17,7 +20,7 @@ describe('Card component', () => {
   };
 
   test('testing single card component', () => {
-    render(<Card {...props} />);
+    renderWithProviders(<Card {...props} />);
 
     expect(screen.getByTestId('card')).toBeInTheDocument();
     expect(screen.getByText('Test Title')).toBeInTheDocument();

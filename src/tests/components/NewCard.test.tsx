@@ -1,25 +1,18 @@
 import React from 'react';
+import { act } from '@testing-library/react';
+import '@testing-library/jest-dom';
 
-import { render } from '@testing-library/react';
 import NewCard from '../../screens/new-card/NewCard';
-import { Provider } from 'react-redux';
-import store from '../../store/store';
+import renderWithProviders from '../../tools/tests/test-utilits';
 
 describe('FormCard', () => {
   it('renders NewCard component', () => {
-    render(
-      <Provider store={store}>
-        <NewCard />
-      </Provider>
-    );
+    renderWithProviders(<NewCard />);
   });
 
-  it('displays the correct text content', () => {
-    const { getByText } = render(
-      <Provider store={store}>
-        <NewCard />
-      </Provider>
-    );
+  it('displays the correct text content', async () => {
+    const { getByText } = await act(async () => renderWithProviders(<NewCard />));
+
     expect(getByText(/Tell us a little about yourself and your preferences/i)).toBeInTheDocument();
     expect(
       getByText(/Indicate how we can contact you, your preferences, your location/i)
@@ -30,21 +23,15 @@ describe('FormCard', () => {
     expect(getByText(/We are waiting for your reply/i)).toBeInTheDocument();
   });
 
-  it('displays the image', () => {
-    const { getByAltText } = render(
-      <Provider store={store}>
-        <NewCard />
-      </Provider>
-    );
+  it('displays the image', async () => {
+    const { getByAltText } = await act(async () => renderWithProviders(<NewCard />));
+
     expect(getByAltText('')).toHaveAttribute('src', '/img/card-plant.png');
   });
 
-  it('renders Form component', () => {
-    const { getByTestId } = render(
-      <Provider store={store}>
-        <NewCard />
-      </Provider>
-    );
+  it('renders Form component', async () => {
+    const { getByTestId } = await act(async () => renderWithProviders(<NewCard />));
+
     expect(getByTestId('form-component')).toBeInTheDocument();
   });
 });

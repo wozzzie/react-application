@@ -1,22 +1,27 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/query';
+import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
 import { cardsApi } from './api/api';
-import searchBarReducer from './reducers/searchBarSlice';
-import searchResultsReducer from './reducers/searchResultsSlice';
-import formReducer from './reducers/formSlice';
+import searchBar from './reducers/searchBarSlice';
+import searchResults from './reducers/searchResultsSlice';
+import form from './reducers/formSlice';
 
-const store = configureStore({
-  reducer: {
-    form: formReducer,
-    searchBar: searchBarReducer,
-    searchResults: searchResultsReducer,
-    [cardsApi.reducerPath]: cardsApi.reducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cardsApi.middleware),
+const rootReducer = combineReducers({
+  searchBar,
+  form,
+  searchResults,
+  [cardsApi.reducerPath]: cardsApi.reducer,
 });
 
-setupListeners(store.dispatch);
+const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    devTools: process.env.NODE_ENV !== 'production',
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cardsApi.middleware),
+  });
+};
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export default store;
+export type AppStore = ReturnType<typeof setupStore>;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = AppStore['dispatch'];
+
+export { setupStore };

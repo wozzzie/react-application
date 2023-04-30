@@ -4,7 +4,7 @@ import './NewCard.css';
 
 const NewCard = () => {
   return (
-    <div className="container">
+    <div className="container" data-testid="card-page">
       <div className="newcard">
         <div className="newcard__text">
           <p>

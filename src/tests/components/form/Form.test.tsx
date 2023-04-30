@@ -1,18 +1,14 @@
-import { render } from '@testing-library/react';
-
-import { fireEvent } from '@testing-library/dom';
-import Form from '../../../components/form/Form';
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from '../../../store/store';
+import '@testing-library/jest-dom';
+import { fireEvent } from '@testing-library/dom';
+
+import Form from '../../../components/form/Form';
+import renderWithProviders from '../../../tools/tests/test-utilits';
 
 describe('Form', () => {
   it('submits the form when all fields are filled correctly', () => {
-    const form = render(
-      <Provider store={store}>
-        <Form />
-      </Provider>
-    );
+    const form = renderWithProviders(<Form />);
+
     const nameInput = form.getByLabelText('Name');
     const requirementsInput = form.getByLabelText('Requirements');
     const dateInput = form.getByLabelText('Date');
@@ -33,11 +29,8 @@ describe('Form', () => {
   });
 
   it('displays errors', () => {
-    const form = render(
-      <Provider store={store}>
-        <Form />
-      </Provider>
-    );
+    const form = renderWithProviders(<Form />);
+
     const nameInput = form.getByLabelText('Name');
     const requirementsInput = form.getByLabelText('Requirements');
     const dateInput = form.getByLabelText('Date');
