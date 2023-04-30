@@ -6,9 +6,9 @@ import RoutesComponent from './components/routes/RoutesComponent';
 
 const App = () => {
   return (
-    <>
+    <div data-testid="routes-component">
       <RoutesComponent />
-    </>
+    </div>
   );
 };
 
