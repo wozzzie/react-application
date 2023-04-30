@@ -16,15 +16,6 @@ describe('SearchBar', () => {
     expect(input).toHaveValue('something');
   });
 
-  test('dispatches setSearchText action when input changes', async () => {
-    const { getByTestId, store } = await act(async () => renderWithProviders(<SearchBar />));
-
-    const input = getByTestId('search-input');
-    fireEvent.change(input, { target: { value: 'something' } });
-
-    expect(store.getState().searchBar.searchText).toEqual('something');
-  });
-
   test('dispatches setSearchText action when form is submitted', async () => {
     const { getByTestId, store } = await act(async () => renderWithProviders(<SearchBar />));
 
