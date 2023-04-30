@@ -68,7 +68,9 @@ const Home: React.FC<HomeProps> = ({ advice }) => {
                 />
               ))
             ) : (
-              <div className="no-results">No results found.</div>
+              <div className="no-results" data-testid="no-results-found">
+                No results found.
+              </div>
             )}
           </div>
           <div className="home__text">

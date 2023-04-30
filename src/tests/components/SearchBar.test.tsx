@@ -1,62 +1,38 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureMockStore from 'redux-mock-store';
+import { describe, test } from 'vitest';
+import { fireEvent, act } from '@testing-library/react';
+import '@testing-library/jest-dom';
+
 import SearchBar from '../../components/searchBar/SearchBar';
-import { Store, AnyAction } from '@reduxjs/toolkit';
+import renderWithProviders from '../../tools/tests/test-utilits';
 
-const mockStore = configureMockStore();
+describe('SearchBar', () => {
+  test('updates search text when input changes', async () => {
+    const { getByTestId } = await act(async () => renderWithProviders(<SearchBar />));
 
-describe('Search Bar component', () => {
-  let store: Store<unknown, AnyAction>;
+    const input = getByTestId('search-input');
+    fireEvent.change(input, { target: { value: 'something' } });
 
-  beforeEach(() => {
-    store = mockStore({
-      searchBar: {
-        searchText: '',
-      },
-    });
+    expect(input).toHaveValue('something');
   });
 
-  test('testing render of the search input', () => {
-    render(
-      <Provider store={store}>
-        <SearchBar onSubmit={() => {}} />
-      </Provider>
-    );
+  test('dispatches setSearchText action when input changes', async () => {
+    const { getByTestId, store } = await act(async () => renderWithProviders(<SearchBar />));
 
-    const searchInput = screen.getByTestId('search-input');
-    expect(searchInput).toBeInTheDocument();
-    expect(searchInput).toHaveValue('');
+    const input = getByTestId('search-input');
+    fireEvent.change(input, { target: { value: 'something' } });
+
+    expect(store.getState().searchBar.searchText).toEqual('something');
   });
 
-  test('testing update of the search input value', () => {
-    render(
-      <Provider store={store}>
-        <SearchBar onSubmit={() => {}} />
-      </Provider>
-    );
+  test('dispatches setSearchText action when form is submitted', async () => {
+    const { getByTestId, store } = await act(async () => renderWithProviders(<SearchBar />));
 
-    const searchInput = screen.getByTestId('search-input');
+    const input = getByTestId('search-input');
+    const form = getByTestId('search-form');
+    fireEvent.change(input, { target: { value: 'something' } });
+    fireEvent.submit(form);
 
-    fireEvent.change(searchInput, { target: { value: '' } });
-    expect(searchInput).toHaveValue('');
-  });
-
-  test('testing load value from store', () => {
-    store = mockStore({
-      searchBar: {
-        searchText: 'plant',
-      },
-    });
-
-    render(
-      <Provider store={store}>
-        <SearchBar onSubmit={() => {}} />
-      </Provider>
-    );
-
-    const searchInput = screen.getByTestId('search-input');
-    expect(searchInput).toHaveValue('plant');
+    expect(store.getState().searchBar.searchText).toEqual('something');
   });
 });

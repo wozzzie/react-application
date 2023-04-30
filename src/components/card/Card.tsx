@@ -18,10 +18,14 @@ const Card: React.FC<CardProps> = ({ image, title, author, location, likes, onCl
       </div>
       <div className="card__content">
         <div className="card__titleBlock">
-          <h2 className="card__title">{title}</h2>
+          <h2 className="card__title" data-testid="card-title">
+            {title}
+          </h2>
           <p className="card__likes">💚 {likes}</p>
         </div>
-        <p className="card__author">Author: {author}</p>
+        <p className="card__author" data-testid="card-authorName">
+          Author: {author}
+        </p>
         <p className="card__location">Location: {location}</p>
       </div>
     </div>

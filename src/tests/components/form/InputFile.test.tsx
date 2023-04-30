@@ -1,9 +1,11 @@
 import React from 'react';
 import { vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import { FileInput } from '../../../components/form';
+import { screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 
+import { FileInput } from '../../../components/form';
 import { FormValues } from '../../../types/form';
+import renderWithProviders from '../../../tools/tests/test-utilits';
 
 describe('FileInput', () => {
   const mockRegister = vi.fn();
@@ -21,14 +23,14 @@ describe('FileInput', () => {
   });
 
   it('should render the component with a label and input', () => {
-    render(<FileInput {...defaultProps} />);
+    renderWithProviders(<FileInput {...defaultProps} />);
 
     expect(screen.getByLabelText('Test Label')).toBeInTheDocument();
     expect(screen.getByLabelText('Test Label')).toHaveAttribute('type', 'file');
   });
 
   it('should show an error message if there is an error', () => {
-    render(<FileInput {...defaultProps} />);
+    renderWithProviders(<FileInput {...defaultProps} />);
     const error = screen.getByTestId('form-error');
 
     expect(error).toHaveTextContent('Test Error');

@@ -1,19 +1,23 @@
 import React from 'react';
 import { vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 
 import { CheckboxInput } from '../../../components/form';
+import renderWithProviders from '../../../tools/tests/test-utilits';
 
 describe('CheckboxInput', () => {
-  test('renders the checkbox input', () => {
-    const { getByLabelText } = render(
-      <CheckboxInput
-        label="Checkbox Label"
-        defaultChecked={false}
-        register={vi.fn()}
-        name="isChecked"
-      />
+  test('renders the checkbox input', async () => {
+    const { getByLabelText } = await act(async () =>
+      renderWithProviders(
+        <CheckboxInput
+          label="Checkbox Label"
+          defaultChecked={false}
+          register={vi.fn()}
+          name="isChecked"
+        />
+      )
     );
 
     const checkboxInput = getByLabelText('Checkbox Label') as HTMLInputElement;
@@ -21,14 +25,16 @@ describe('CheckboxInput', () => {
     expect(checkboxInput.checked).toBe(false);
   });
 
-  test('renders the label for the checkbox', () => {
-    const { getByText } = render(
-      <CheckboxInput
-        label="Checkbox Label"
-        defaultChecked={false}
-        register={vi.fn()}
-        name="isChecked"
-      />
+  test('renders the label for the checkbox', async () => {
+    const { getByText } = await act(async () =>
+      renderWithProviders(
+        <CheckboxInput
+          label="Checkbox Label"
+          defaultChecked={false}
+          register={vi.fn()}
+          name="isChecked"
+        />
+      )
     );
 
     expect(getByText('Checkbox Label')).toBeInTheDocument();
@@ -37,7 +43,7 @@ describe('CheckboxInput', () => {
   test('renders an error message if an error is provided', () => {
     const errorMessage = 'This is an error message';
 
-    render(
+    renderWithProviders(
       <CheckboxInput
         label="Checkbox Label"
         defaultChecked={false}
@@ -56,7 +62,7 @@ describe('CheckboxInput', () => {
     const registerFunction = vi.fn();
     const checkboxName = 'isChecked';
 
-    render(
+    renderWithProviders(
       <CheckboxInput
         label="Checkbox Label"
         defaultChecked={false}

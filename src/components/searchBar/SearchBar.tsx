@@ -20,7 +20,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="search-form__wrapper">
+    <div className="search-form__wrapper" data-testid="search-bar">
       <form className="search-form" onSubmit={handleSearchSubmit} data-testid="search-form">
         <input
           data-testid="search-input"
