@@ -33,10 +33,14 @@ const handlers = [
     return res(ctx.json(cards), ctx.delay(150));
   }),
 
-  rest.get('https://mock-server-api-two.vercel.app/catalog', (req, res, ctx) => {
-    const searchTerm = req.url.searchParams.get('q');
-    const filteredCards = cards.filter((card) =>
-      card.title.toLowerCase().includes(searchTerm?.toLowerCase() ?? '')
+  rest.get('https://mock-server-api-two.vercel.app/catalog*', (req, res, ctx) => {
+    const searchTerm = req.url.searchParams.get('q')?.toLowerCase();
+
+    const filteredCards = cards.filter((el) =>
+      Object.entries(el).some(
+        ([key, val]) =>
+          typeof val === 'string' && key !== 'image' && val.toLowerCase().includes(searchTerm ?? '')
+      )
     );
 
     if (filteredCards.length === 0) {
